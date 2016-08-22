@@ -1,0 +1,9 @@
+:root {
+  --phone-breakpoint-max: 425px;
+  --tablet-breakpoint-min: 768px;
+  --desktop-breakpoint-min: 945px;
+}
+
+@media (min-width: var(--desktop-breakpoint-min)) {
+
+}

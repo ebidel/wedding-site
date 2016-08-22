@@ -1,0 +1,338 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block head %}
+<style>
+:root {
+  --chevron-size: 100px;
+  --maroon-color: rgba(82,50,45,1);
+  --card-size-small: 164px;
+}
+
+.navbar .names {
+  display: none;
+}
+
+.header_announcement  {
+  color: #fff;
+  letter-spacing: -0.05em;
+  font-family: "Spinnaker", Arial, Helvetica, sans-serif;
+  padding-top: 50px;
+  text-align: center;
+  font-size: 34px;
+  height: calc(100vh - var(--navbar-height));
+  text-shadow: 1px 1px 5px var(--maroon-color);
+}
+.header_announcement h1 {
+  font-size: 80px;
+}
+.header_announcement h2 {
+  font-size: 39px; /* match width of names */
+}
+.header_announcement .ampersand {
+  color: var(--maroon-color);
+  font-family: 'Lobster', cursive;
+  margin: 0 12px;
+  /*text-shadow: 1px 1px 5px rgb(237,187,91);*/
+  text-shadow: none;
+  font-size: 90px;
+  position: relative;
+  top: 8px;
+}
+.background-photo {
+  background: url("img/vines2.jpg") no-repeat 50% 0%;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+.chevron {
+  height: var(--chevron-size);
+  width: var(--chevron-size);
+  fill: #fff;
+  position: absolute;
+  bottom: 16px;
+  left: calc(50% - var(--chevron-size) / 2);
+}
+
+#adventures .card {
+  margin: var(--content-padding) var(--content-padding) 0 0;
+  width: var(--card-size-small);
+  height: var(--card-size-small);
+}
+
+#adventures .card.fullspan {
+  position: relative;
+  flex: 1;
+}
+
+#adventures .card.shrink {
+  overflow: hidden;
+}
+
+#adventures .card.fullspan::before {
+  content: attr(data-year);
+  position: absolute;
+  top: 0;
+}
+
+#adventures .card img {
+  width: var(--card-size-small);
+  height: var(--card-size-small);
+  object-fit: cover;
+  /*border-radius: 3px;*/
+  transition: all 200ms ease-in-out;
+}
+
+#adventures .card.fullspan img {
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% -150px;
+}
+
+#adventures .card.shrink img {
+  --card-size-large: calc(var(--card-size-small) + 20px);
+  width: var(--card-size-large);
+  height: var(--card-size-large);
+}
+
+#adventures .card.shrink img:hover {
+  width: var(--card-size-small);
+  height: var(--card-size-small);
+}
+
+#adventures .date {
+  font-family: 'Lobster', cursive;
+  font-size: 60px;
+  width: 164px;
+  height: 164px;
+  letter-spacing: 0.05em;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="header_announcement">
+  <h1>Jackie<span class="ampersand">&amp;</span>Eric</h1>
+  <h2><span class="date">July 8, 2017<span> &middot; Sonoma, CA</h2>
+  <img src="img/chevron2.svg" class="chevron bounce">
+</div>
+
+<section id="aboutus">
+  <div class="content-width">
+    <h2 class="section_title">About the couple</h2>
+    <div class="layout horizontal">
+      <div>
+        <h3>The Bride</h3>
+        <p>She's cool</p>
+      </div>
+      <div>
+        <h3>The Groom</h3>
+        <p>He's cool.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="adventures">
+  <div class="content-width">
+    <h2 class="section_title">Our adventures</h2>
+
+    <div class="layout horizontal wrap">
+      <div class="card date layout horizontal center-center">2012</div>
+      <div class="card shrink gray">
+        <a href="img/adventures/xmas.jpg" target="_blank"><img src="img/adventures/xmas.jpg" title="Holiday party 2012"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/xmas2.jpg" target="_blank"><img src="img/adventures/xmas2.jpg" title="Holiday party 2012"></a>
+      </div>
+      <div class="card date layout horizontal center-center">2013</div>
+      <!-- <div class="card shrink gray">
+        <a href="img/adventures/io.jpg" target="_blank"><img src="img/adventures/io.jpg"></a>
+      </div> -->
+      <div class="card shrink gray">
+        <a href="img/adventures/sandiego.jpg" target="_blank"><img src="img/adventures/sandiego.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/wedding.jpg" target="_blank"><img src="img/adventures/wedding.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/disney.jpg" target="_blank"><img src="img/adventures/disney.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/disney2.jpg" target="_blank"><img src="img/adventures/disney2.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/disney3.jpg" target="_blank"><img src="img/adventures/disney3.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/jurassic.jpg" target="_blank"><img src="img/adventures/jurassic.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/shark.jpg" target="_blank"><img src="img/adventures/shark.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/speeder.jpg" target="_blank"><img src="img/adventures/speeder.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/halloween2.jpg" target="_blank"><img src="img/adventures/halloween2.jpg"></a>
+      </div>
+      <div class="card date layout horizontal center-center">2014</div>
+      <div class="card shrink gray">
+        <a href="img/adventures/ney.jpg" target="_blank"><img src="img/adventures/nye.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/skiing.jpg" target="_blank"><img src="img/adventures/skiing.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/barrel.jpg" target="_blank"><img src="img/adventures/barrel.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/ams.jpg" target="_blank"><img src="img/adventures/ams.jpg" title="Amsterdam, Nederlands"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/london.jpg" target="_blank"><img src="img/adventures/london.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/london2.jpg" target="_blank"><img src="img/adventures/london2.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/greece.jpg" target="_blank"><img src="img/adventures/greece.jpg" title="Parthenon, Athens, Greece"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/cruise.jpg" target="_blank"><img src="img/adventures/cruise.jpg" title="Cruise, Greece"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/santorini.jpg" target="_blank"><img src="img/adventures/santorini.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/santorini2.jpg" target="_blank"><img src="img/adventures/santorini2.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/rome.jpg" target="_blank"><img src="img/adventures/rome.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/rome2.jpg" target="_blank"><img src="img/adventures/rome2.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/capri.jpg" target="_blank"><img src="img/adventures/capri.jpg" title="Capri, Italy"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/sf.jpg" target="_blank"><img src="img/adventures/sf.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/mexico.jpg" target="_blank"><img src="img/adventures/mexico.jpg" title="Puerto Vallarta, Mexico"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/timessquare.jpg" target="_blank"><img src="img/adventures/timessquare.jpg" title="Time Square, NYC"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/corn.jpg" target="_blank"><img src="img/adventures/corn.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/halloween.jpg" target="_blank"><img src="img/adventures/halloween.jpg"></a>
+      </div>
+      <div class="card date layout horizontal center-center">2015</div>
+      <div class="card shrink gray">
+        <a href="img/adventures/nye2015.jpg" target="_blank"><img src="img/adventures/nye2015.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/chicago.jpg" target="_blank"><img src="img/adventures/chicago.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/vegas.jpg" target="_blank"><img src="img/adventures/vegas.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/grandcanyon.jpg" target="_blank"><img src="img/adventures/grandcanyon.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/grandcanyon2.jpg" target="_blank"><img src="img/adventures/grandcanyon2.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/water.jpg" target="_blank"><img src="img/adventures/water.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/goats.jpg" target="_blank"><img src="img/adventures/goats.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/graceland.jpg" target="_blank"><img src="img/adventures/graceland.jpg" title="Graceland, Memphis TN"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/nice.jpg" target="_blank"><img src="img/adventures/nice.jpg" title="Nice, France"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/monaco.jpg" target="_blank"><img src="img/adventures/monaco.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/paris.jpg" target="_blank"><img src="img/adventures/paris.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/parrot.jpg" target="_blank"><img src="img/adventures/parrot.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/booth.jpg" target="_blank"><img src="img/adventures/booth.jpg"></a>
+      </div>
+      <div class="card date layout horizontal center-center">2016</div>
+      <div class="card shrink gray">
+        <a href="img/adventures/alaska.jpg" target="_blank"><img src="img/adventures/alaska.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/d4g.jpg" target="_blank"><img src="img/adventures/d4g.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/alaska2.jpg" target="_blank"><img src="img/adventures/alaska2.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/taj.jpg" target="_blank"><img src="img/adventures/taj.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/india.jpg" target="_blank"><img src="img/adventures/india.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/india2.jpg" target="_blank"><img src="img/adventures/india2.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/hawaii.jpg" target="_blank"><img src="img/adventures/hawaii.jpg"></a>
+      </div>
+      <div class="card date layout horizontal center-center" style="font-size:40px;">Engaged</div>
+      <div class="card shrink gray">
+        <a href="img/adventures/engage.jpg" target="_blank"><img src="img/adventures/engage.jpg"></a>
+      </div>
+      <div class="card shrink gray">
+        <a href="img/adventures/engage2.jpg" target="_blank"><img src="img/adventures/engage2.jpg"></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="background-photo"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function(exports) {
+'use strict';
+
+const chevron = document.querySelector('.chevron');
+
+function onScroll(scrollTop) {
+  if (scrollTop > 0) {
+    chevron.classList.remove('bounce');
+  } else {
+    chevron.classList.add('bounce');
+  }
+}
+
+lazyLoadImagesWhenVisible();
+
+exports.onScroll = onScroll;
+
+})(window);
+</script>
+{% endblock %}

@@ -1,0 +1,8 @@
+# Ignore NPM stuff.
+node_modules
+npm-debug.log
+
+# Other generated/common stuff.
+.tmp
+.DS_Store
+*.pyc
