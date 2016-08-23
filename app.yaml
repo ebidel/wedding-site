@@ -54,3 +54,4 @@ skip_files:
   - test*
   - bower_components/[^/]+/bower_components/.*$
   - bower_components/(.+/)+(test/|demo/|README|AUTHORS|CONTRIBUTING|PATENTS|Makefile)
+  - node_modules/

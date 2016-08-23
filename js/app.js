@@ -16,16 +16,4 @@ window.addEventListener('scroll', function(e) {
   exports.onScroll && exports.onScroll(scroller.scrollTop);
 });
 
-function lazyLoadImagesWhenVisible(container) {
-  const adventures = document.querySelector('#adventures');
-  let observer = new IntersectionObserver((records, observer) => {
-    observer.unobserve(adventures);
-
-    // TODO: lazy load images.
-  });
-  observer.observe(adventures);
-}
-
-exports.lazyLoadImagesWhenVisible = lazyLoadImagesWhenVisible;
-
 })(window);

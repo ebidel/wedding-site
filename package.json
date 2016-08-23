@@ -1,0 +1,22 @@
+{
+  "name": "wedding-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Jackie & Eric's Get Married!",
+  "main": "index.html",
+  "scripts": {
+    "postinstall": "npm run copy",
+    "build": "./node_modules/uglify-js/bin/uglifyjs js/dist/intersection-observer.js -c -o js/dist/intersection-observer.min.js",
+    "clean": "rm -rf js/dist",
+    "copy": "mkdir js/dist; cp node_modules/intersection-observer/intersection-observer.js js/dist/",
+    "deploy": "./scripts/deploy.sh"
+  },
+  "author": "Eric Bidelman <ebidel@>",
+  "license": "Apach2",
+  "dependencies": {
+    "intersection-observer": "^0.1.1"
+  },
+  "devDependencies": {
+    "uglify-js": "^2.7.3"
+  }
+}

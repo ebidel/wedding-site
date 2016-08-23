@@ -6,3 +6,4 @@ npm-debug.log
 .tmp
 .DS_Store
 *.pyc
+js/dist
