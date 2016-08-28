@@ -13,24 +13,12 @@ section p {
   font-weight: 400;
   line-height: 40px;
 }
-.details {
-  background-color: rgba(255,255,255,0.8);
-  border-radius: 3px;
-  padding: var(--content-padding);
-}
-.details .label {
-  font-family: 'Lobster', cursive;
-  font-size: 32px;
-  font-weight: 600;
-}
+
 .map_wrapper {
   display: inline-block;
   padding: 8px;
   background-color: #fff;
   height: calc(400px + var(--content-padding));
-}
-iframe {
-  border: none;
 }
 
 .background-photo {
@@ -44,6 +32,13 @@ iframe {
   z-index: -1;
 }
 
+.details-when::before {
+  background: url(/img/icons/clock.svg) no-repeat 50% 50%;
+}
+
+.details-where::before {
+  background: url(/img/icons/location.svg) no-repeat 50% 50%;
+}
 /*@media (min-width: 945px) {
 
 }*/
@@ -55,12 +50,12 @@ iframe {
 <section id="details">
   <div class="content-width layout horizontal justified">
   <div class="details">
-    <h3 class="label">When</h3>
+    <h3 class="label details-label details-when">When</h3>
     <p>
       Saturday July 8, 2017<br>
       Ceremony begins X:XXpm??
     </p>
-    <h3 class="label">Where</h3>
+    <h3 class="label details-label details-where">Where</h3>
     <p>
       <a href="http://www.cornerstonesonoma.com/tyge-cellars-barn/" rel="noopener" target="_blank">The Barn at Tyge William Cellars</a><br>
       150 Wagner Rd, Sonoma, CA 95476
