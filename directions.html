@@ -4,49 +4,82 @@
 
 {% block head %}
 <style>
+.top_section {
+  height: 50vh;
+  margin-bottom: -150px;
+}
 
-.map_wrapper {
+#directions_section {
+  background: none;
+}
 
+.details {
+  width: 45%;
 }
 
 .parallax-img-1::after {
-  background-image: url("/img/tyge1.jpg");
-  background-position: 50% 55%;
+  background-image: url("/img/tyge3.jpg");
+  background-position: 50% 50%;
+  opacity: 0.6;
 }
 
 .details-directions::before {
   background: url(/img/icons/directions.svg) no-repeat 50% 50%;
+}
+
+.background-photo {
+  background: url("/img/tyge2.jpg") no-repeat 50% 55%;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  /*z-index: -1;*/
+  /*opacity: 0.5;*/
 }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<section id="details">
+<div class="top_section parallax-img parallax-img-1">
+  <!-- <div class="details">
+    <h3 class="label details-label details-directions">Directions</h3>
+    <p>
+      blah
+    </p>
+  </div> -->
+</div>
+
+<section id="directions_section">
   <div class="content-width layout horizontal justified">
-    <div class="details">
+    <div class="details shadow">
       <h3 class="label details-label details-directions">Directions</h3>
       <p>
         blah
       </p>
     </div>
-    <div>
-      blah
+    <div class="details shadow">
+      <h3 class="label details-label details-directions">Directions</h3>
+      <p>
+        blah
+      </p>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="map_wrapper content-width">
-    <iframe width="400" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=10" allowfullscreen></iframe>
+   <div class="map_wrapper content-width">
+    <iframe width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=11" allowfullscreen></iframe>
   </div>
 </section>
 
 <!-- <div class="background-photo"></div> -->
-<section class="parallax-img fixed-bg parallax-img-1">
+
+<!-- <section class="parallax-img fixed-bg parallax-img-1">
   <div class="content-width">
 
   </div>
-</section>
+</section> -->
 
 {% endblock %}

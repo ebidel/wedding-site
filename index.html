@@ -6,7 +6,6 @@
 <style>
 :root {
   --chevron-size: 100px;
-  /*--maroon-color: rgba(82,50,45,1);*/
   --card-size-small: 164px;
 }
 
@@ -15,20 +14,17 @@
 }
 
 .header_announcement  {
-  /*color: #fff;*/
   color: #de7c70;
   font-family: "Pacifico", cursive;
-  padding-top: var(--navbar-height);
+  padding-top: calc(var(--navbar-height) + 40px);
   text-align: center;
   font-size: 34px;
-  /*height: calc(100vh - var(--navbar-height));*/
-  height: 100vh;
-  /*text-shadow: 1px 1px 5px rgb(0,78,215);*/
 }
 .header_announcement h1 {
   font-size: 12vw;
   margin-left: -40px;
   margin-bottom: 0;
+  text-shadow: 1px 1px 5px #fff;
 }
 .header_announcement h2 {
   color: #3f755b;
@@ -51,6 +47,7 @@
   position: absolute;
   bottom: 16px;
   left: calc(50% - var(--chevron-size) / 2);
+  cursor: pointer;
 }
 
 #adventures .card {
@@ -84,20 +81,20 @@
   transform: none;
 }
 
-#adventures .card.fullspan {
+/*#adventures .card.fullspan {
   position: relative;
   flex: 1;
-}
+}*/
 
 #adventures .card.shrink {
   overflow: hidden;
 }
 
-#adventures .card.fullspan::before {
+/*#adventures .card.fullspan::before {
   content: attr(data-year);
   position: absolute;
   top: 0;
-}
+}*/
 
 #adventures .card img {
   /*width: var(--card-size-small);*/
@@ -110,11 +107,11 @@
   visibility: hidden;
 }
 
-#adventures .card.fullspan img {
+/*#adventures .card.fullspan img {
   width: 100%;
   object-fit: cover;
   object-position: 50% -150px;
-}
+}*/
 
 #adventures .card.shrink img {
   --card-size-large: calc(var(--card-size-small) + 20px);
@@ -142,12 +139,12 @@
 
 .parallax-img-2::after {
   /*background-image: url("/img/grapes.jpg");*/
-  background-image: url("/img/vines6.jpg");
+  background-image: url("/img/vines5.jpg");
   /*opacity: 0.75;*/
 }
 
 .parallax-img-3::after {
-  background-image: url("/img/vines5.jpg");
+  background-image: url("/img/vines6.jpg");
   /*opacity: 0.75;*/
 }
 
@@ -173,7 +170,7 @@
 
 {% block content %}
 
-<div class="header_announcement parallax-img parallax-img-1 show">
+<div class="header_announcement top_section parallax-img parallax-img-1 show">
   <h1>Jackie<span class="ampersand">&#10084;</span>Eric</h1>
   <h2><span class="date">July 8, 2017<span> &middot; Sonoma, CA</h2>
   <img src="/img/icons/chevron2.svg" class="chevron bounce">
@@ -551,7 +548,6 @@
   </div>
 </section>
 
-<!-- <div class="background-photo"></div> -->
 {% endblock %}
 
 {% block scripts %}
@@ -561,6 +557,10 @@
 'use strict';
 
 const chevron = document.querySelector('.chevron');
+
+chevron.addEventListener('click', e => {
+  smoothScroll(document.querySelector('#aboutus'), 600);
+});
 
 function onScroll(scrollTop) {
   if (scrollTop > 0) {
@@ -572,7 +572,7 @@ function onScroll(scrollTop) {
 
 function lazyLoadImagesWhenVisible() {
   const observer = new IntersectionObserver((records, observer) => {
-    for (var record of records) {
+    for (const record of records) {
       const img = record.target;
       img.src = img.dataset.src;
       observer.unobserve(img);
@@ -584,13 +584,15 @@ function lazyLoadImagesWhenVisible() {
 }
 
 function swapBackgroundImagesWhenInView() {
+  const imgs = Array.from(document.querySelectorAll('.parallax-img'));
+
   const observer = new IntersectionObserver((records, observer) => {
-    const record = records[0]; // Should only have 1 record anyways.
-    record.target.classList.toggle('show', record.intersectionRatio);
+    for (const record of records) {
+      record.target.classList.toggle('show', record.intersectionRatio);
+    }
   });
 
-  const imgs = document.querySelectorAll('.parallax-img');
-  Array.from(imgs).forEach(img => observer.observe(img));
+  imgs.forEach(img => observer.observe(img));
 }
 
 lazyLoadImagesWhenVisible();
