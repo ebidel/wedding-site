@@ -1,11 +1,17 @@
+{% set navigation_bar = [
+  ('/theday', 'Details'),
+  ('/directions', 'Getting here'),
+  ('/things', 'Things to Do'),
+  ('/hotels', 'Hotels'),
+  ('/gifts', 'Gifts'),
+  ('/rsvp', 'RSVP')
+] -%}
+
 <div class="navbar">
   <nav class="content-width layout horizontal center-center">
-    <!-- <a href="/" class="flex names">Jackie &amp; Eric</a> -->
     <a href="/" class="flex names">Jackie<span class="ampersand">&#10084;</span>Eric</h1>
-    <a href="theday">Details</a>
-    <a href="directions">Directions</a>
-    <a href="hotels">Hotels</a>
-    <a href="gifts">Gifts</a>
-    <a href="rsvp">RSVP</a>
+    {% for href, caption in navigation_bar -%}
+      <a href="{{ href|e }}" {% if href|e == active_page %}class="active"{% endif %}>{{caption|e}}</a>
+    {% endfor -%}
   </nav>
 </div>

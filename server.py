@@ -64,7 +64,7 @@ class Site(webapp2.RequestHandler):
       path += '.html'
 
     data = {
-
+      'active_page': self.request.path
     }
 
     render(self.response, path, data)

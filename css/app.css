@@ -57,10 +57,6 @@ section .subsection_title {
   font-size: 30px;
 }
 
-/*.main-content {
-  padding-top: calc(var(--navbar-height));
-}*/
-
 .content-width {
   max-width: var(--site-width);
   width: calc(100% - 32px);
@@ -82,7 +78,7 @@ section .subsection_title {
   justify-content: space-between;
 }
 .layout.vertical {
-  justify-content: column;
+  flex-direction: column;
 }
 .flex {
   flex: 1;
@@ -96,6 +92,9 @@ section .subsection_title {
 .side-by-side > * {
   width: calc(50% - 32px);
 }
+.center {
+  text-align: center;
+}
 /* ============================== */
 
 .navbar {
@@ -107,15 +106,21 @@ section .subsection_title {
   left: 0;
   width: 100%;
   height: var(--navbar-height);
-  transition: all 300ms ease-in-out;
+  transition: background 200ms ease-in-out;
   will-change: color, background-color;
   z-index: 1;
   -webkit-font-smoothing: initial;
+  /*background: linear-gradient(to top, transparent, transparent);*/
 }
 
 .navbar.colorize {
-  background-color: rgba(0,0,0,0.2); /*rgba(82,50,45,0.5);*/
+  background-color: rgba(0,0,0,0.6);
+  /*background: linear-gradient(to top, transparent, rgba(0,0,0,0.6));*/
   color: #fff;
+}
+
+.navbar.colorize a.active::after {
+  color: currentColor;
 }
 
 .navbar nav {
@@ -123,14 +128,37 @@ section .subsection_title {
 }
 
 .navbar a {
+  position: relative;
+  align-items: center;
+  display: flex;
+  height: 100%;
   padding: calc(var(--content-padding) /2 ) var(--content-padding);
+  /*margin: 0 var(--content-padding);*/
 }
+
+.navbar a.active::after  {
+  content: '';
+  background: currentColor;
+  left: 0;
+  right: 0;
+  position: absolute;
+  height: 2px;
+  display: block;
+  bottom: 0;
+  color: #ccc;
+}
+
+/*.navbar a:hover,
+.navbar a.active {
+  border-bottom: 2px solid currentColor;
+}*/
 
 .navbar .names {
   font-size: 24px;
   padding: 0;
   font-family: "Pacifico", cursive;
   text-transform: none;
+  /*color: #de7c70;*/
 }
 
 .navbar .ampersand {
@@ -143,7 +171,7 @@ section .subsection_title {
 }
 
 .top_section {
-  height: 100vh;
+  padding-top: calc(var(--navbar-height) * 2);
 }
 
 section .photo.pull-right {
@@ -160,16 +188,16 @@ section .circle {
   object-position: -60px 50%;
 }
 
-.details {
-  /*background-color: rgba(255,255,255,0.8);*/
+.box {
   background-color: #fff;
   border-radius: 3px;
   padding: var(--content-padding);
 }
-.details .label {
-  font-family: 'Lobster', cursive;
-  font-size: 32px;
-  font-weight: 600;
+.box .label {
+  /*font-family: 'Lobster', cursive;*/
+  font-family: "Pacifico", cursive;
+  font-size: 40px;
+  /*font-weight: 600;*/
 }
 
 .details-label {
@@ -179,8 +207,8 @@ section .circle {
 
 .details-label::before {
   content: '';
-  height: 30px;
-  width: 30px;
+  height: 45px;
+  width: 45px;
   display: inline-block;
   margin-right: calc(var(--content-padding) / 2);
 }

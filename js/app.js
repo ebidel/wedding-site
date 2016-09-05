@@ -5,6 +5,8 @@
 const scroller = document.scrollingElement || document.body;
 const navbar = document.querySelector('.navbar');
 
+let _disableElementScrollTimeout = null;
+
 // From http://en.wikipedia.org/wiki/Smoothstep
 function smoothStep(start, end, point) {
   if (point <= start) {
@@ -56,6 +58,39 @@ function smoothScroll(el, duration = 1, callback = null, offset = 0) {
   cb(startTime);
 }
 
+/**
+ * Disables a container from user interaction (using pointer-events: none)
+ * when the page is scrolling. Enables it again
+ *
+ * @param {HTMLElement} container The container to
+ * @param {Function} callback Optional callback, invoked when the user
+ *     has stopped scrolling after opt_enableAfter ms (or default 250ms).
+ * @param {boolean} enableAfter Optional number of ms to enable
+ *     interaction on the container after the user has stopped scrolling.
+ */
+function disableElementOnScroll(container, callback=null, enableAfter=250) {
+  if (!_disableElementScrollTimeout) {
+    container.style.pointerEvents = 'none';
+  }
+
+  clearTimeout(_disableElementScrollTimeout);
+
+  _disableElementScrollTimeout = setTimeout(function() {
+    container.style.pointerEvents = 'auto';
+    callback && callback();
+    _disableElementScrollTimeout = null;
+  }, enableAfter);
+}
+
+// function highlightSelectPageInNav() {
+//   Array.from(navbar.querySelectorAll('a')).forEach(function(a) {
+//     const href = a.getAttribute('href'); // use unresolved URL as authored.
+//     if (href === location.pathname) {
+//       a.classList.add('selected');
+//     }
+//   });
+// }
+
 window.addEventListener('scroll', function(e) {
   navbar.classList.toggle('colorize', scroller.scrollTop > 0);
 
@@ -68,6 +103,9 @@ fab.addEventListener('click', e => {
   smoothScroll(document.body, 1);
 });
 
+// highlightSelectPageInNav();
+
 exports.smoothScroll = smoothScroll;
+exports.disableElementOnScroll = disableElementOnScroll;
 
 })(window);

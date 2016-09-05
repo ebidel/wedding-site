@@ -21,8 +21,8 @@ section p {
   height: calc(400px + var(--content-padding));
 }
 
-.background-photo {
-  background: url("img/tyge3.jpg") no-repeat 50% 0%;
+/*.background-photo {
+  background: url("img/grapes.jpg") no-repeat 50% 0%;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -31,7 +31,7 @@ section p {
   right: 0;
   z-index: -1;
 }
-
+*/
 .details-when::before {
   background: url(/img/icons/clock.svg) no-repeat 50% 50%;
 }
@@ -39,6 +39,12 @@ section p {
 .details-where::before {
   background: url(/img/icons/location.svg) no-repeat 50% 50%;
 }
+
+.parallax-img-1::after {
+  background-image: url("/img/grapes.jpg");
+  background-position: 50% 0%;
+}
+
 /*@media (min-width: 945px) {
 
 }*/
@@ -47,7 +53,7 @@ section p {
 
 {% block content %}
 
-<section id="details">
+<section id="details" class="top_section">
   <div class="content-width layout horizontal justified">
   <div class="details">
     <h3 class="label details-label details-when">When</h3>
@@ -68,6 +74,19 @@ section p {
   </div>
 </section>
 
-<div class="background-photo"></div>
+<section class="parallax-img fixed-bg parallax-img-1">
+  <div class="content-width">
+
+  </div>
+</section>
+
+<section id="wedding_party">
+  <div class="content-width">
+    <h2 class="section_title">Wedding party</h2>
+  </div>
+</section>
+
+
+<!-- <div class="background-photo"></div> -->
 
 {% endblock %}
