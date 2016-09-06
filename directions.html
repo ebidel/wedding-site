@@ -4,10 +4,6 @@
 
 {% block head %}
 <style>
-section {
-  background-color: transparent;
-}
-
 .top_section {
   /*height: 50vh;*/
   padding-bottom: 0;
@@ -49,6 +45,7 @@ section {
   display: flex;
   justify-content: center;
   height: 40px;
+  /*width: 40px;*/
 }
 
 .icon-directions {
@@ -67,15 +64,14 @@ section {
 
 {% block content %}
 
-<section class="top_section">
+<section class="top_section seethrough">
   <div class="content-width layout horizontal justified box shadow">
     <div>
-      <!-- <h3 class="label details-label details-directions">Directions</h3> -->
       <h3 class="label details-label details-directions">Directions</h3>
       <!-- <div class="icon icon-directions"></div> -->
       <div class="center">
         <p>The Barn at Tyge William Cellars<br>
-        <b>150 Wagner Rd, Sonoma, CA 95476</b></p>
+        <b><a href="https://www.google.com/maps/place/The+Barn+at+Tyge+William+Cellars/@38.228276,-122.455799,11z/data=!4m5!3m4!1s0x0:0xf0f45ad8dddb3f34!8m2!3d38.2282759!4d-122.4557992?hl=en-US" rel="noopener" target="_blank">150 Wagner Rd, Sonoma, CA 95476</a></b></p>
       </div>
       <h3>Flying</h3>
       <p>We recommend flying into San Francisco International Airport (SFO) or Oakland International Airport (OAK). The drive to Tyge is <b>1hr 20min</b> from SFO and <b>~1hr</b> from OAK.</p>
@@ -83,7 +79,7 @@ section {
       <p>Remember, the Bay Area is notorious for traffic! If you're driving up Friday night, you'll likely hit rush hour traffic. Saturday morning should fine. Please plan accordingly.</p>
     </div>
     <div class="map_wrapper">
-      <iframe width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=11" allowfullscreen></iframe>
+      <iframe width="100%" height="430" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=11" allowfullscreen></iframe>
     </div>
   </div>
 </section>
@@ -96,17 +92,19 @@ section {
   </div>
 </section> -->
 
-<section>
+<section class="seethrough">
   <div class="content-width layout horizontal center-center box shadow">
     <h3 class="label">Shuttle Information</h3>
-    <div class="icon icon-shuttle"></div>
-    <p>
-      We'll have a shuttle to pick up guests at nearby hotels. More info to come.
-    </p>
+    <div>
+      <div class="icon icon-shuttle"></div>
+      <p>
+        We'll have a shuttle to pick up guests at nearby hotels. More info to come.
+      </p>
+    </div>
   </div>
 </section>
 
-<section class="parallax-img fixed-bg parallax-img-1">
+<section class="parallax-img fixed-bg parallax-img-1 seethrough">
   <div class="content-width">
 
   </div>

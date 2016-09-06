@@ -7,6 +7,7 @@
 :root {
   --chevron-size: 100px;
   --card-size-small: 164px;
+  --cloud-grey: rgb(209,209,209);
 }
 
 .navbar .names {
@@ -14,7 +15,7 @@
 }
 
 .header_announcement  {
-  color: #de7c70;
+  color: var(--pink-color);
   font-family: "Pacifico", cursive;
   /*padding-top: calc(var(--navbar-height) + 40px);*/
   text-align: center;
@@ -62,7 +63,7 @@
 
 #adventures .card:not(.date) {
   background: url("/img/icons/whale.png") no-repeat 50% 50%;
-  background-color: #81d4fa;
+  background-color: var(--cloud-grey);
   background-size: 75px;
 }
 
@@ -85,24 +86,11 @@
   transform: none;
 }
 
-/*#adventures .card.fullspan {
-  position: relative;
-  flex: 1;
-}*/
-
 #adventures .card.shrink {
   overflow: hidden;
 }
 
-/*#adventures .card.fullspan::before {
-  content: attr(data-year);
-  position: absolute;
-  top: 0;
-}*/
-
 #adventures .card img {
-  /*width: var(--card-size-small);*/
-  /*height: var(--card-size-small);*/
   object-fit: cover;
   transition: all 200ms ease-in-out;
 }
@@ -110,12 +98,6 @@
 #adventures .card img:not([src]) {
   visibility: hidden;
 }
-
-/*#adventures .card.fullspan img {
-  width: 100%;
-  object-fit: cover;
-  object-position: 50% -150px;
-}*/
 
 #adventures .card.shrink img {
   --card-size-large: calc(var(--card-size-small) + 20px);
@@ -133,12 +115,12 @@
   font-size: 60px;
   width: 164px;
   height: 164px;
-  background-color: #eee;
+  background-color: var(--cloud-grey);
 }
 
 .parallax-img-1::after {
   background-image: url("/img/card.png");
-  background-position: 50% 55%;
+  background-position: 50% 60%;
 }
 
 .parallax-img-2::after {
@@ -149,7 +131,63 @@
 
 .parallax-img-3::after {
   background-image: url("/img/vines6.jpg");
-  /*opacity: 0.75;*/
+}
+
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.6);
+  visibility: hidden;
+  opacity: 0;
+  will-change: opacity;
+  transition: all 300ms ease-in-out;
+  contain: content;
+  z-index: 1;
+}
+
+#lightbox.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+#lightbox .lightbox-img {
+  height: 75vh;
+  width: auto;
+}
+
+#lightbox figure {
+  background-color: #fff;
+  margin: 0;
+  padding: var(--content-padding);
+  padding-top: 50px;
+  padding-bottom: 0;
+  transform: scale(0.5);
+  will-change: transform;
+  transition: transform 300ms ease-in-out;
+  position: relative;
+}
+
+#lightbox.open figure {
+  transform: none;
+}
+
+#lightbox figure .close {
+  --icon-size: 24px;
+  position: absolute;
+  right: calc(var(--content-padding) / 2 + 2px);
+  top: var(--content-padding);
+  height: var(--icon-size);
+  width: var(--icon-size);
+  cursor: pointer;
+}
+
+#lightbox figcaption {
+  text-align: center;
+  padding: var(--content-padding);
+  font-size: 18px;
 }
 
 @media (max-width: 767px) {
@@ -232,8 +270,8 @@
       <div class="card shrink gray">
         <a href="/img/adventures/xmas.jpg" target="_blank">
           <img data-src="/img/adventures/xmas.jpg" title="Holiday party 2012">
+          <summary>Google Holiday Party</summary>
         </a>
-        <summary>Google Holiday Party</summary>
       </div>
       <div class="card shrink gray">
         <a href="/img/adventures/xmas2.jpg" target="_blank">
@@ -551,6 +589,14 @@
   </div>
 </section>
 
+<div id="lightbox" class="layout horizontal center-center">
+  <figure>
+    <img src="/img/icons/close.svg" class="close">
+    <img src="" class="lightbox-img">
+    <figcaption><!-- filled dynamically --></figcaption>
+  </figure>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -598,8 +644,107 @@ function swapBackgroundImagesWhenInView() {
   imgs.forEach(img => observer.observe(img));
 }
 
+function initGallery() {
+  const container = document.querySelector('#adventures');
+  const galleryImgs = Array.from(container.querySelectorAll('img'));
+
+  const gallery = document.querySelector('#lightbox');
+  const galleryImg = gallery.querySelector('.lightbox-img');
+  const galleryCaption = gallery.querySelector('figcaption');
+
+  const galleryOpen = function(e) {
+    document.body.classList.add('noscroll');
+    document.addEventListener('click', galleryClose);
+    gallery.classList.add('open');
+  };
+
+  const galleryClose = function(e) {
+    if (!e || e.target === gallery) {
+      document.removeEventListener('click', galleryClose);
+      gallery.classList.remove('open');
+      document.body.classList.remove('noscroll');
+    }
+  };
+
+  const gallerySelect = function(idx) {
+    const img = galleryImgs[idx];
+    gallery.setAttribute('selected', idx);
+    // Image hasn't been scrolled into view yet and had its src set
+    // by the IntersectionObserver. Do it manually.
+    if (!img.src) {
+      img.src = img.dataset.src;
+    }
+    galleryImg.src = img.src;
+    galleryCaption.textContent = img.nextElementSibling.textContent;
+  };
+
+  const gallerySelectNext = function(reverse=false) {
+    let idx = parseInt(gallery.getAttribute('selected')) || 0;
+    if (reverse) {
+      idx = idx === 0 ? galleryImgs.length - 1 : idx - 1;
+    } else {
+      idx = (idx + 1) % galleryImgs.length;
+    }
+    gallerySelect(idx);
+  };
+
+  const gallerySelectPrev = function() {
+    let idx = parseInt(gallery.getAttribute('selected')) || 0;
+    idx = (idx + 1) % galleryImgs.length;
+    gallerySelect(idx);
+  };
+
+  gallery.querySelector('.close').addEventListener('click', e => {
+    galleryClose();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!gallery.classList.contains('open')) {
+      return;
+    }
+
+    let flag = false;
+
+    switch (e.code) {
+      case 'Escape':
+        galleryClose();
+        flag = true;
+        break;
+      case 'ArrowLeft':
+        flag = true;
+        gallerySelectNext(true);
+        break;
+      case 'ArrowRight':
+        flag = true;
+        gallerySelectNext();
+      case 'Space':
+        flag = true;
+        gallerySelectNext(e.shiftKey);
+        break;
+      default:
+        break;
+    }
+
+    if (flag) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+
+  container.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target.localName === 'img') {
+      let idx = galleryImgs.indexOf(e.target);
+      gallerySelect(idx);
+      galleryOpen();
+    }
+  });
+}
+
 lazyLoadImagesWhenVisible();
 swapBackgroundImagesWhenInView();
+initGallery();
 
 exports.onScroll = onScroll;
 

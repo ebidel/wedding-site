@@ -9,6 +9,8 @@
   --phone-breakpoint-max: 425px;
   --tablet-breakpoint-min: 768px;
   --desktop-breakpoint-min: 945px;
+
+  --pink-color: #de7c70;
 }
 
 * {
@@ -28,13 +30,21 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.noscroll {
+  overflow: hidden;
+}
+
 a {
   color: currentColor;
   text-decoration: none;
 }
 
+.main-content a:hover {
+  text-decoration: underline;
+}
+
 p {
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 figcaption {
@@ -132,8 +142,7 @@ section .subsection_title {
   align-items: center;
   display: flex;
   height: 100%;
-  padding: calc(var(--content-padding) /2 ) var(--content-padding);
-  /*margin: 0 var(--content-padding);*/
+  padding: calc(var(--content-padding) / 2) var(--content-padding);
 }
 
 .navbar a.active::after  {
@@ -145,20 +154,19 @@ section .subsection_title {
   height: 2px;
   display: block;
   bottom: 0;
-  color: #ccc;
+  color: #888;
 }
 
-/*.navbar a:hover,
-.navbar a.active {
-  border-bottom: 2px solid currentColor;
-}*/
+.navbar a:hover {
+  /*border-bottom: 2px solid currentColor;*/
+  color: var(--pink-color)
+}
 
 .navbar .names {
   font-size: 24px;
   padding: 0;
   font-family: "Pacifico", cursive;
   text-transform: none;
-  /*color: #de7c70;*/
 }
 
 .navbar .ampersand {
@@ -172,6 +180,10 @@ section .subsection_title {
 
 .top_section {
   padding-top: calc(var(--navbar-height) * 2);
+}
+
+section.seethrough {
+  background-color: transparent;
 }
 
 section .photo.pull-right {
@@ -192,6 +204,7 @@ section .circle {
   background-color: #fff;
   border-radius: 3px;
   padding: var(--content-padding);
+  padding-left: calc(var(--content-padding) * 2);
 }
 .box .label {
   /*font-family: 'Lobster', cursive;*/

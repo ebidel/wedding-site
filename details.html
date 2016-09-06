@@ -21,6 +21,10 @@ section p {
   height: calc(400px + var(--content-padding));
 }
 
+.details a.small {
+  font-size: 18px;
+}
+
 /*.background-photo {
   background: url("img/grapes.jpg") no-repeat 50% 0%;
   background-size: cover;
@@ -32,6 +36,11 @@ section p {
   z-index: -1;
 }
 */
+
+.details .indent {
+  padding-left: 55px;
+}
+
 .details-when::before {
   background: url(/img/icons/clock.svg) no-repeat 50% 50%;
 }
@@ -41,7 +50,7 @@ section p {
 }
 
 .parallax-img-1::after {
-  background-image: url("/img/grapes.jpg");
+  background-image: url("/img/adventures/sandiego.jpg");
   background-position: 50% 0%;
 }
 
@@ -56,17 +65,17 @@ section p {
 <section id="details" class="top_section">
   <div class="content-width layout horizontal justified">
   <div class="details">
-    <h3 class="label details-label details-when">When</h3>
-    <p>
+    <h3 class="label details-label details-when"><b>When</b></h3>
+    <p class="indent">
       Saturday July 8, 2017<br>
-      Ceremony begins X:XXpm??
+      Ceremony begins TBD
     </p>
-    <h3 class="label details-label details-where">Where</h3>
-    <p>
-      <a href="http://www.cornerstonesonoma.com/tyge-cellars-barn/" rel="noopener" target="_blank">The Barn at Tyge William Cellars</a><br>
+    <h3 class="label details-label details-where"><b>Where</b></h3>
+    <p class="indent">
+      <a href="http://www.cornerstonesonoma.com/tyge-cellars-barn/" rel="noopener" target="_blank">Tyge William Cellars</a><br>
       150 Wagner Rd, Sonoma, CA 95476
     </p>
-    <div><a href="/directions">Get directions</a></div>
+    <p class="indent"><a href="/directions" class="small">Get directions &rsaquo;</a></p>
   </div>
   <div class="map_wrapper">
     <iframe width="400" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=10" allowfullscreen></iframe>
@@ -83,6 +92,14 @@ section p {
 <section id="wedding_party">
   <div class="content-width">
     <h2 class="section_title">Wedding party</h2>
+    <h3 class="subsection_title">Bridesmaids</h3>
+    <p>
+      TODO
+    </p>
+    <h3 class="subsection_title">Groomsmen</h3>
+    <p>
+      TODO
+    </p>
   </div>
 </section>
 
