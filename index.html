@@ -190,9 +190,29 @@
   font-size: 18px;
 }
 
+
+@media (max-width: 575px) {
+  .header_announcement .ampersand {
+    top: -8px;
+  }
+}
+
 @media (max-width: 767px) {
+  .chevron {
+    --chevron-size: 50px;
+  }
+
   .photos_container {
     justify-content: center;
+  }
+  .header_announcement .ampersand {
+    margin: 0 10px 0 15px;
+  }
+  .top_section {
+    height: 60vh;
+  }
+  .parallax-img-1::after {
+    background-position: 50% 50%;
   }
 }
 

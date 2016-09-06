@@ -94,6 +94,10 @@ fab.addEventListener('click', e => {
   smoothScroll(document.body, 1);
 });
 
+navbar.addEventListener('click', e => {
+  navbar.classList.toggle('open');
+});
+
 exports.smoothScroll = smoothScroll;
 exports.disableElementOnScroll = disableElementOnScroll;
 

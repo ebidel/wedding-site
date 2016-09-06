@@ -5,6 +5,7 @@
   --section-padding: 72px;
 
   --navbar-height: 64px;
+  --navbar-colorize: rgba(0,0,0,0.6);
 
   --phone-breakpoint-max: 425px;
   --tablet-breakpoint-min: 768px;
@@ -124,7 +125,7 @@ section .subsection_title {
 }
 
 .navbar.colorize {
-  background-color: rgba(0,0,0,0.6);
+  background-color: var(--navbar-colorize);
   /*background: linear-gradient(to top, transparent, rgba(0,0,0,0.6));*/
   color: #fff;
 }
@@ -142,19 +143,7 @@ section .subsection_title {
   align-items: center;
   display: flex;
   height: 100%;
-  padding: calc(var(--content-padding) / 2) var(--content-padding);
-}
-
-.navbar a.active::after  {
-  content: '';
-  background: currentColor;
-  left: 0;
-  right: 0;
-  position: absolute;
-  height: 2px;
-  display: block;
-  bottom: 0;
-  color: #888;
+  padding: calc(var(--content-padding) / 2) 0;
 }
 
 .navbar a:hover {
@@ -315,6 +304,14 @@ iframe {
               0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
+.menu-icon {
+  height: 24px;
+  width: 24px;
+  fill: currentColor;
+  cursor: pointer;
+  display: inline-block;
+}
+
 .fab-wrapper {
   position: absolute;
   top: 0;
@@ -353,7 +350,73 @@ footer {
   position: relative;
 }
 
-/*@media (min-width: var(--desktop-breakpoint-min)) {
+@media (max-width: 767px) {
+  :root {
+    --section-padding: 40px;
+  }
 
-}*/
+  .menu-icon {
+    top: calc(var(--content-padding) + 3px);
+    position: absolute;
+  }
+  .navbar {
+    overflow: hidden;
+    transition: clip 300ms cubic-bezier(0,0,0.2,1);
+    clip: rect(0px 100vw var(--navbar-height) 0px);
+    padding-bottom: var(--content-padding);
+  }
+  .navbar.open {
+    height: auto;
+    background-color: var(--navbar-colorize);
+    clip: rect(0px 100vw 400px 0px);
+    color: #fff;
+  }
+  .navbar .home_link {
+    margin-top: var(--navbar-height);
+  }
+  .navbar .names {
+    display: none;
+  }
+  .top_section {
+    padding-top: var(--navbar-height);
+  }
+  section .section_title {
+    font-size: 30px;
+    margin-bottom: var(--content-padding);
+  }
+  section .subsection_title {
+    font-size: 25px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    height: var(--navbar-height);
+  }
+  .navbar nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar a {
+    padding: calc(var(--content-padding) / 2) var(--content-padding);
+  }
+  .navbar .home_link {
+    display: none;
+  }
+  .navbar a.active::after  {
+    content: '';
+    background: currentColor;
+    left: 0;
+    right: 0;
+    position: absolute;
+    height: 2px;
+    display: block;
+    bottom: 0;
+    color: #888;
+  }
+  .menu-icon {
+    display: none;
+  }
+}
 
