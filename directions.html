@@ -5,22 +5,17 @@
 {% block head %}
 <style>
 .top_section {
-  /*height: 50vh;*/
   padding-bottom: 0;
 }
 
 .map_wrapper {
-  flex: 1 0 50%;
-  height: 100%;
+  max-width: 100%;
+  flex: 1 0 400px;
 }
 
-/*.details {
-  width: 50%;
+.sidebyside {
+  flex-wrap: wrap;
 }
-
-.details:first-child {
-  margin-right: calc(var(--content-padding) * 2);
-}*/
 
 .parallax-img-1::after {
   background-image: linear-gradient(to top, transparent 85%, white),
@@ -56,16 +51,21 @@
   background: url(/img/icons/shuttle.svg) no-repeat 50% 50%;
 }
 
-/*@media (min-width: 945px) {
-
-}*/
+@media (min-width: 758px) {
+  .map_wrapper {
+    max-width: 400px;
+  }
+  .sidebyside {
+    flex-wrap: nowrap;
+  }
+}
 </style>
 {% endblock %}
 
 {% block content %}
 
 <section class="top_section seethrough">
-  <div class="content-width layout horizontal justified box shadow">
+  <div class="content-width layout horizontal justified box shadow sidebyside">
     <div>
       <h3 class="label details-label details-directions">Directions</h3>
       <!-- <div class="icon icon-directions"></div> -->
@@ -93,7 +93,7 @@
 </section> -->
 
 <section class="seethrough">
-  <div class="content-width layout horizontal center-center box shadow">
+  <div class="content-width layout horizontal center-center sidebyside box shadow">
     <h3 class="label">Shuttle Information</h3>
     <div>
       <div class="icon icon-shuttle"></div>
