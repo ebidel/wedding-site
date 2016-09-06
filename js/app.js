@@ -82,15 +82,6 @@ function disableElementOnScroll(container, callback=null, enableAfter=250) {
   }, enableAfter);
 }
 
-// function highlightSelectPageInNav() {
-//   Array.from(navbar.querySelectorAll('a')).forEach(function(a) {
-//     const href = a.getAttribute('href'); // use unresolved URL as authored.
-//     if (href === location.pathname) {
-//       a.classList.add('selected');
-//     }
-//   });
-// }
-
 window.addEventListener('scroll', function(e) {
   navbar.classList.toggle('colorize', scroller.scrollTop > 0);
 
@@ -102,8 +93,6 @@ const fab = document.querySelector('.fab');
 fab.addEventListener('click', e => {
   smoothScroll(document.body, 1);
 });
-
-// highlightSelectPageInNav();
 
 exports.smoothScroll = smoothScroll;
 exports.disableElementOnScroll = disableElementOnScroll;
