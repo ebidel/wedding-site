@@ -12,6 +12,8 @@
   --desktop-breakpoint-min: 945px;
 
   --pink-color: #de7c70;
+
+  --chevron-size: 100px;
 }
 
 * {
@@ -93,6 +95,9 @@ section .subsection_title {
 }
 .flex {
   flex: 1;
+}
+.layout.horizontal.end {
+  justify-content: flex-end;
 }
 .wrap {
   flex-wrap: wrap;
@@ -193,13 +198,23 @@ section .circle {
   background-color: #fff;
   border-radius: 3px;
   padding: var(--content-padding);
-  /*padding-left: calc(var(--content-padding) * 2);*/
+  padding-left: calc(var(--content-padding) * 2);
 }
 .box .label {
   /*font-family: 'Lobster', cursive;*/
   font-family: "Pacifico", cursive;
   font-size: 40px;
   /*font-weight: 600;*/
+}
+
+.chevron {
+  height: var(--chevron-size);
+  width: var(--chevron-size);
+  fill: #fff;
+  position: absolute;
+  bottom: 16px;
+  left: calc(50% - var(--chevron-size) / 2);
+  cursor: pointer;
 }
 
 .details-label {
@@ -256,6 +271,8 @@ iframe {
   max-width: 100%;
   flex: 1 0 400px;
 }
+
+
 
 /* Firefox */
 @supports not (shape-outside: circle(175px at 50% 50%)) {
@@ -358,6 +375,10 @@ footer {
 @media (max-width: 767px) {
   :root {
     --section-padding: 40px;
+  }
+
+  .chevron {
+    --chevron-size: 50px;
   }
 
   .menu-icon {

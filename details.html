@@ -8,8 +8,9 @@ section p {
   margin: 1em 0;
   line-height: 1.8;
 }
+
 #details {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 400;
   line-height: 40px;
 }
@@ -19,8 +20,15 @@ section p {
   background-color: #fff;
 }
 
+.details {
+  background: rgba(255,255,255,0.8);
+  width: 40%;
+  padding: calc(var(--content-padding) * 2) var(--content-padding);
+}
+
 .details a.small {
   font-size: 18px;
+  font-weight: 600;
 }
 
 /*.background-photo {
@@ -32,8 +40,8 @@ section p {
   left: 0;
   right: 0;
   z-index: -1;
-}
-*/
+}*/
+
 
 .details .indent {
   padding-left: 55px;
@@ -49,7 +57,17 @@ section p {
 
 .parallax-img-1::after {
   background-image: url("/img/adventures/sandiego.jpg");
-  background-position: 50% 0%;
+  background-position: 50% 50%;
+}
+
+.chevron {
+  height: var(--chevron-size);
+  width: var(--chevron-size);
+  fill: #fff;
+  position: absolute;
+  bottom: 16px;
+  left: calc(50% - var(--chevron-size) / 2);
+  cursor: pointer;
 }
 
 /*@media (min-width: 945px) {
@@ -60,24 +78,45 @@ section p {
 
 {% block content %}
 
-<section id="details" class="top_section">
+<!-- <section id="details" class="top_section">
   <div class="content-width layout horizontal justified wrap">
-  <div class="details">
-    <h3 class="label details-label details-when"><b>When</b></h3>
-    <p class="indent">
-      Saturday July 8, 2017<br>
-      Ceremony begins TBD
-    </p>
-    <h3 class="label details-label details-where"><b>Where</b></h3>
-    <p class="indent">
-      <a href="http://www.cornerstonesonoma.com/tyge-cellars-barn/" rel="noopener" target="_blank">Tyge William Cellars</a><br>
-      150 Wagner Rd, Sonoma, CA 95476
-    </p>
-    <p class="indent"><a href="/directions" class="small">Get directions &rsaquo;</a></p>
+    <div class="details">
+      <h3 class="label details-label details-when"><b>When</b></h3>
+      <p class="indent">
+        Saturday July 8, 2017<br>
+        Ceremony begins 4:30pm
+      </p>
+      <h3 class="label details-label details-where"><b>Where</b></h3>
+      <p class="indent">
+        <a href="http://www.cornerstonesonoma.com/tyge-cellars-barn/" rel="noopener" target="_blank">Tyge William Cellars</a><br>
+        150 Wagner Rd, Sonoma, CA 95476
+      </p>
+      <p class="indent"><a href="/directions" class="small">Get directions &rsaquo;</a></p>
+    </div>
+    <div class="map_wrapper">
+      <iframe width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=10" allowfullscreen></iframe>
+    </div>
   </div>
-  <div class="map_wrapper">
-    <iframe width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=10" allowfullscreen></iframe>
-  </div>
+</section> -->
+
+<section id="details" class="top_section seethrough">
+  <div class="content-width layout horizontal end">
+    <div class="details box shadow">
+      <h3 class="label details-label details-when">When</h3>
+      <p class="indent">
+        Saturday July 8, 2017<br>
+        Ceremony begins 4:30pm
+      </p>
+      <h3 class="label details-label details-where">Where</h3>
+      <p class="indent">
+        <a href="http://www.cornerstonesonoma.com/tyge-cellars-barn/" rel="noopener" target="_blank">Tyge William Cellars</a><br>
+        150 Wagner Rd, Sonoma, CA 95476
+      </p>
+      <div class="indent">
+        <a href="/directions" class="small">Get directions &rsaquo;</a>
+      </div>
+    </div>
+    <img src="/img/icons/chevron2.svg" class="chevron bounce">
   </div>
 </section>
 

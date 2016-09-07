@@ -5,7 +5,6 @@
 {% block head %}
 <style>
 :root {
-  --chevron-size: 100px;
   --card-size-small: 164px;
   --cloud-grey: rgb(209,209,209);
 }
@@ -43,16 +42,6 @@
 
 .top_section {
   height: 100vh;
-}
-
-.chevron {
-  height: var(--chevron-size);
-  width: var(--chevron-size);
-  fill: #fff;
-  position: absolute;
-  bottom: 16px;
-  left: calc(50% - var(--chevron-size) / 2);
-  cursor: pointer;
 }
 
 #adventures .card {
@@ -198,10 +187,6 @@
 }
 
 @media (max-width: 767px) {
-  .chevron {
-    --chevron-size: 50px;
-  }
-
   .photos_container {
     justify-content: center;
   }
