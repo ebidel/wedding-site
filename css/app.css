@@ -173,8 +173,6 @@ section .subsection_title {
   margin: 0 4px 0 5px;
   text-shadow: none;
   font-size: 60%;
-  top: -5px;
-  position: relative;
 }
 
 .top_section {
