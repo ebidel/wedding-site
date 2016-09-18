@@ -1,10 +1,10 @@
 {% set navigation_bar = [
-  ('/details', 'Details'),
-  ('/directions', 'Getting here'),
-  ('/things', 'Things to Do'),
-  ('/hotels', 'Hotels'),
-  ('/gifts', 'Gifts'),
-  ('/rsvp', 'RSVP')
+  ('/details', 'Details', false),
+  ('/directions', 'Getting here', false),
+  ('/things', 'Things to Do', false),
+  ('/hotels', 'Hotels', true),
+  ('/gifts', 'Gifts', true),
+  ('/rsvp', 'RSVP', true)
 ] -%}
 
 <div class="navbar">
@@ -16,8 +16,8 @@
     </svg>
     <a href="/" class="flex names">Jackie<span class="ampersand">&#10084;</span>Eric</h1>
     <a href="/" class="flex home_link">Home</a>
-    {% for href, caption in navigation_bar -%}
-      <a href="{{ href|e }}" {% if href|e == active_page %}class="active"{% endif %}>{{caption|e}}</a>
+    {% for href, caption, disable in navigation_bar -%}
+      <a href="{{ href|e }}" {% if href|e == active_page %}class="active"{% endif %} {% if disable %}disabled{% endif %}>{{caption|e}}</a>
     {% endfor -%}
   </nav>
 </div>

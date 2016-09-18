@@ -18,4 +18,5 @@ readonly APPDIR=$(dirname $BASH_SOURCE)
 
 echo "Deploying app version: $deployVersion"
 gcloud app deploy $APPDIR/../app.yaml \
-    --project jackieeric-wedding --version $deployVersion --no-promote
+    --project jackieeric-wedding --version $deployVersion --no-promote \
+    --account ebidel@gmail.com

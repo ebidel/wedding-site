@@ -22,8 +22,6 @@ section p {
 
 .details {
   background: rgba(255,255,255,0.8);
-  width: 40%;
-  padding: calc(var(--content-padding) * 2) var(--content-padding);
 }
 
 .details a.small {
@@ -70,9 +68,12 @@ section p {
   cursor: pointer;
 }
 
-/*@media (min-width: 945px) {
-
-}*/
+@media (min-width: 768px) {
+  .details {
+    width: 40%;
+    padding: calc(var(--content-padding) * 2) var(--content-padding);
+  }
+}
 </style>
 {% endblock %}
 
@@ -94,7 +95,7 @@ section p {
       <p class="indent"><a href="/directions" class="small">Get directions &rsaquo;</a></p>
     </div>
     <div class="map_wrapper">
-      <iframe width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA-bY8907pxjRUAyO5zOQWZGyx_3-MkA0Y&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=10" allowfullscreen></iframe>
+      <iframe width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBPZ5dzFC8H5o019h-lGhvAZbf3ag8XnAY&q=The+Barn+at+Tyge+William+Cellars,150 Wagner Rd, Sonoma, CA 95476,Sonoma+CA&zoom=10" allowfullscreen></iframe>
     </div>
   </div>
 </section> -->
@@ -120,7 +121,7 @@ section p {
   </div>
 </section>
 
-<section class="parallax-img fixed-bg parallax-img-1">
+<section class="parallax-img fixed-bg parallax-img-1" style="min-height:auto">
   <div class="content-width">
 
   </div>
@@ -131,11 +132,11 @@ section p {
     <h2 class="section_title">Wedding party</h2>
     <h3 class="subsection_title">Bridesmaids</h3>
     <p>
-      TODO
+      Coming soon...
     </p>
     <h3 class="subsection_title">Groomsmen</h3>
     <p>
-      TODO
+      Coming soon...
     </p>
   </div>
 </section>

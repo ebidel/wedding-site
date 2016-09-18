@@ -108,13 +108,12 @@
 }
 
 .parallax-img-1::after {
-  background-image: url("/img/card.png");
-  background-position: 50% 60%;
+  background-image: url("/img/card-mobile.png");
 }
 
 .parallax-img-2::after {
   /*background-image: url("/img/grapes.jpg");*/
-  background-image: url("/img/vines5.jpg");
+  background-image: url("/img/vines5-smaller.png");
   /*opacity: 0.75;*/
 }
 
@@ -187,6 +186,9 @@
 }
 
 @media (max-width: 767px) {
+  .navbar .home_link {
+    margin-top: var(--navbar-height);
+  }
   .photos_container {
     justify-content: center;
   }
@@ -210,6 +212,10 @@
   }
   #adventures .card {
     margin: var(--content-padding) var(--content-padding) 0 0;
+  }
+  .parallax-img-1::after {
+    background-image: url("/img/card2.png");
+    background-position: 50% 60%;
   }
 }
 </style>
