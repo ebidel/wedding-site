@@ -13,8 +13,8 @@ fi
 
 readonly APPDIR=$(dirname $BASH_SOURCE)
 
-#echo "\nBuilding app version: $deployVersion\n"
-#gulp
+echo "\nBuilding app version: $deployVersion\n"
+gulp
 
 echo "Deploying app version: $deployVersion"
 gcloud app deploy $APPDIR/../app.yaml \

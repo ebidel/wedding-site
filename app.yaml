@@ -13,24 +13,19 @@ handlers:
 
 - url: /bower_components
   static_dir: bower_components
-  #secure: always
+  secure: always
 
 - url: /css
   static_dir: css
-  #secure: always
+  secure: always
 
 - url: /img
   static_dir: img
-  #secure: always
+  secure: always
 
 - url: /js
   static_dir: js
-  #secure: always
-
-#- url: /humans.txt
-#  static_files: humans.txt
-#  upload: humans.txt
-#  secure: always
+  secure: always
 
 #- url: /manifest.json
 #  static_files: manifest.json
@@ -38,9 +33,13 @@ handlers:
 #  mime_type: application/manifest+json
 #  secure: always
 
+- url: /\.well\-known\/acme\-challenge\/.*
+  script: letsencrypt.app
+  secure: always
+
 - url: .*
   script: server.app
-  #secure: always
+  secure: always
 
 skip_files:
   - ^(.*/)?#.*#$

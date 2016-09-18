@@ -2,6 +2,8 @@
 node_modules
 npm-debug.log
 
+letsencrypt/
+
 # Other generated/common stuff.
 .tmp
 .DS_Store
