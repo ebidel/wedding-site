@@ -5,8 +5,7 @@
   "description": "Jackie & Eric's Get Married!",
   "main": "index.html",
   "scripts": {
-    "postinstall": "gulp",
-    "deploy": "./scripts/deploy.sh"
+    "postinstall": "gulp"
   },
   "author": "Eric Bidelman <ebidel@>",
   "license": "Apach2",
