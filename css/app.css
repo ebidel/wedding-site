@@ -380,8 +380,8 @@ footer {
   }
 
   .chevron {
-    /*--chevron-size: 50px;*/
-    display: none;
+    --chevron-size: 50px;
+    /*display: none;*/
   }
 
   .menu-icon {
