@@ -1,6 +1,6 @@
 #application: jackieeric
 runtime: python27
-api_version: 1
+api_version: sw
 threadsafe: yes
 
 libraries:
@@ -25,6 +25,11 @@ handlers:
 
 - url: /js
   static_dir: js
+  secure: always
+
+- url: /dexecure-(.*).js
+  static_files: js/dexecure-\1.js
+  upload: /dexecure-(.*).js
   secure: always
 
 #- url: /manifest.json
