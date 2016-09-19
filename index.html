@@ -112,9 +112,7 @@
 }
 
 .parallax-img-2::after {
-  /*background-image: url("/img/grapes.jpg");*/
   background-image: url("/img/vines5-smaller.png");
-  /*opacity: 0.75;*/
 }
 
 .parallax-img-3::after {
@@ -196,11 +194,20 @@
     margin: 0 10px 0 15px;
   }
   .top_section {
-    height: 70vh;
+    /*height: 100vw;*/
     padding-top: calc(var(--navbar-height));
+  }
+  .parallax-img {
+    height: 100vw;
   }
   .parallax-img-1::after {
     background-position: 50% 50%;
+  }
+  #lightbox .lightbox-img {
+    height: auto;
+    width: 80vw;
+    max-height: 70vh;
+    object-fit: cover;
   }
 }
 
@@ -225,7 +232,7 @@
 {% block content %}
 
 <div class="header_announcement top_section parallax-img parallax-img-1 show">
-  <h1>Jackie<span class="ampersand">&#10084;</span>Eric</h1>
+  <h1>Jackie<span class="ampersand">&hearts;</span>Eric</h1>
   <h2><span class="date">July 8, 2017<span> &middot; Sonoma, CA</h2>
   <img src="/img/icons/chevron2.svg" class="chevron bounce">
 </div>

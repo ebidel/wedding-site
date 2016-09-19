@@ -100,6 +100,33 @@ navbar.addEventListener('click', e => {
   }
 });
 
+const mediaQueryList = window.matchMedia('(orientation: portrait)');
+
+function setMaxHeight(mediaQueryList) {
+  const vh = window.innerHeight;
+  let vw = window.innerWidth;
+
+  vw = Math.max(vh, vw);
+
+  document.documentElement.style.setProperty('--viewport-height', vh + 'px');
+  document.documentElement.style.setProperty('--viewport-width', vw + 'px');
+
+  // const imgs = document.querySelectorAll('.parallax-img');
+  // Array.from(imgs).forEach(img => {
+  //   if (mediaQueryList.matches) {
+  //     img.style.height = `${Math.max(vh, vw)}px`;
+  //   } else {
+  //     img.style.height = `${Math.min(vh, vw)}px`;
+  //   }
+  // });
+}
+
+setMaxHeight(mediaQueryList);
+// mediaQueryList.addListener(setMaxHeight);
+// window.addEventListener('resize', e => {
+//   // setMaxHeight(mediaQueryList);
+// });
+
 exports.smoothScroll = smoothScroll;
 exports.disableElementOnScroll = disableElementOnScroll;
 

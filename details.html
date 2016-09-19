@@ -30,7 +30,7 @@ section p {
 }
 
 /*.background-photo {
-  background: url("img/grapes.jpg") no-repeat 50% 0%;
+  background: url("/img/adventures/sandiego.jpg") no-repeat 50% 0%;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -38,8 +38,8 @@ section p {
   left: 0;
   right: 0;
   z-index: -1;
-}*/
-
+}
+*/
 
 .details .indent {
   padding-left: 55px;
@@ -53,19 +53,29 @@ section p {
   background: url(/img/icons/location.svg) no-repeat 50% 50%;
 }
 
-.parallax-img-1::after {
-  background-image: url("/img/adventures/sandiego.jpg");
-  background-position: 50% 50%;
+@media (max-width: 767px) {
+  .parallax-img-1::after {
+    background-position: 50% 100%;
+    background-size: calc(var(--viewport-width) * 1.33) var(--viewport-height);
+  }
 }
 
-.chevron {
-  height: var(--chevron-size);
-  width: var(--chevron-size);
-  fill: #fff;
-  position: absolute;
-  bottom: 16px;
-  left: calc(50% - var(--chevron-size) / 2);
-  cursor: pointer;
+/*@media (max-device-aspect-ratio: 3/4) {
+  height: calc(100vw * 1.333 - 9%);
+}
+@media (max-device-aspect-ratio: 2/3) {
+  height: calc(100vw * 1.5 - 9%);
+}
+@media (max-device-aspect-ratio: 10/16) {
+  height: calc(100vw * 1.6 - 9%);
+}
+@media (max-device-aspect-ratio: 9/16) {
+  height: calc(100vw * 1.778 - 9%);
+}
+*/
+
+.parallax-img-1::after {
+  background-image: url("/img/adventures/sandiego.jpg");
 }
 
 @media (min-width: 768px) {
@@ -141,7 +151,28 @@ section p {
   </div>
 </section>
 
-
 <!-- <div class="background-photo"></div> -->
 
 {% endblock %}
+
+{% block scripts %}
+<script>
+(function(exports) {
+'use strict';
+
+const chevron = document.querySelector('.chevron');
+
+function onScroll(scrollTop) {
+  if (scrollTop > 0) {
+    chevron.classList.remove('bounce');
+  } else {
+    chevron.classList.add('bounce');
+  }
+}
+
+exports.onScroll = onScroll;
+
+})(window);
+</script>
+{% endblock %}
+

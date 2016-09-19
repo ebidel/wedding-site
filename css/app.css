@@ -417,6 +417,10 @@ footer {
   section .subsection_title {
     font-size: 25px;
   }
+  .parallax-img.fixed-bg::after {
+    background-position: 50% 100%;
+    background-size: calc(var(--viewport-width) * 1.33) var(--viewport-height);
+  }
 }
 
 @media (min-width: 768px) {
