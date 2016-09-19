@@ -1,6 +1,6 @@
 #application: jackieeric
 runtime: python27
-api_version: sw
+api_version: 1
 threadsafe: yes
 
 libraries:
