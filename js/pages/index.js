@@ -94,6 +94,12 @@ function initGallery() {
     galleryClose();
   });
 
+  const nextArrow = gallery.querySelector('.arrow.right');
+  nextArrow.addEventListener('click', e => gallerySelectNext());
+
+  const prevArrow = gallery.querySelector('.arrow.left');
+  prevArrow.addEventListener('click', e => gallerySelectNext(true));
+
   document.addEventListener('keydown', e => {
     if (!gallery.classList.contains('open')) {
       return;
