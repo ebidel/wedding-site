@@ -16,6 +16,18 @@
   <!-- <link rel="stylesheet" href="/css/responsive.css" media="(max-width: 768px)"> -->
 
   {% block head %}{% endblock %}
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', {scope:'./'}).then(function(reg) {
+        if (reg.installing) {
+          // Force refresh page so service worker has control and smaller web
+          // images are downloaded.
+          location.reload();
+        }
+      });
+    }
+  </script>
 </head>
 <body>
 {% include 'partials/header.html' %}

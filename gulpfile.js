@@ -26,30 +26,19 @@ function compileWithClosure(fileName) {
 
 // Clean generated files.
 gulp.task('clean', function() {
-  del([`js/${DIST_DIR}`], {dot: true});
+  del([`js/${DIST_DIR}`, 'img/**/*.webp'], {dot: true});
+});
+
+gulp.task('images', function() {
+  gulp.src([
+    'img/**/*.{jpg,png}',
+    '!img/unused/**/*',
+  ])
+  .pipe($.webp({quality: 75, preset: 'photo', method: 6}))
+  .pipe(gulp.dest('img'))
 });
 
 gulp.task('copy', function() {
-  // let docs = gulp.src([
-  //     'app/**/*.html',
-  //     'app/**/nav.yaml',
-  //     'app/**/blog.yaml',
-  //     'app/**/authors.yaml',
-  //     '!app/{bower_components,elements}/**',
-  //     '!app/1.0/homepage/**',
-  //    ], {base: 'app/'})
-  //   .pipe(gulp.dest('dist'));
-
-  // let gae = gulp.src([
-  //     '{templates,lib}/**/*'
-  //    ])
-  //   .pipe(gulp.dest('dist'));
-
-  // let bower = gulp.src([
-  //     'app/bower_components/webcomponentsjs/webcomponents*.js'
-  //   ], {base: 'app/'})
-  //   .pipe(gulp.dest('dist'));
-
   let insersectionObserver = gulp.src([
       'node_modules/intersection-observer/intersection-observer.js'
     ])
@@ -87,5 +76,5 @@ gulp.task('build', function() {
 
 // Build production files.
 gulp.task('default', ['clean'], cb => {
-  runSequence('copy', 'build', cb);
+  runSequence('copy', 'images', 'build', cb);
 });

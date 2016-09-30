@@ -100,6 +100,35 @@ navbar.addEventListener('click', e => {
   }
 });
 
+// function hasWebPSupport() {
+//   return new Promise((resolve, reject) => {
+//     const img = document.createElement('img');
+//     img.onload = e => {
+//       // The image has these dimensions.
+//       if (e.target.width === 2 && e.target.height === 1) {
+//         resolve();
+//       } else {
+//         reject();
+//       }
+//     };
+//     img.onerror = reject;
+//     img.src = 'data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACyAgCdASoCAAEALmk0mk0iIiIiIgBoSygABc6zbAAA/v56QAAAAA==';
+//   });
+// }
+
+// hasWebPSupport().then(_ => {
+//   const imgs = document.querySelectorAll('img');
+//   Array.from(imgs).forEach(img => {
+//     if ('src' in img.dataset) {
+//       img.dataset.src = img.dataset.src.replace(/\.jpg|png$/, '.webp');
+//     } else {
+//       img.src = img.src.replace(/\.jpg|png$/, '.webp');
+//     }
+//   });
+// }, function() {
+//   // .webp not supported.
+// });
+
 const mediaQueryList = window.matchMedia('(orientation: portrait)');
 
 function setMaxHeight(mediaQueryList) {

@@ -9,3 +9,4 @@ letsencrypt/
 .DS_Store
 *.pyc
 js/dist
+img/**/*.webp
