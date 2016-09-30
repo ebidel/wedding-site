@@ -19,6 +19,12 @@ handlers:
   static_dir: css
   secure: always
 
+- url: /img/(.+\.webp)
+  mime_type: image/webp
+  static_files: img/\1
+  upload: img/(.+\.webp)
+  secure: always
+
 - url: /img
   static_dir: img
   secure: always
