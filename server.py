@@ -41,6 +41,9 @@ def handle_500(req, resp, data, e):
 
 class Site(webapp2.RequestHandler):
 
+  def post(self, path):
+    self.response.out.write("Thanks! We've received your RSVP")
+
   def get(self, path):
     #self.response.headers['Content-Type'] = 'text/html'
     #self.response.write('Hello, World!')

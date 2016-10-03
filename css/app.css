@@ -37,6 +37,10 @@ body.noscroll {
   overflow: hidden;
 }
 
+.hidden, [hidden] {
+  display: none !important;
+}
+
 a {
   color: currentColor;
   text-decoration: none;

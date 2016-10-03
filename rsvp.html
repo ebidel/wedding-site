@@ -4,15 +4,67 @@
 
 {% block head %}
 <style>
-.powr-form-builder {
+/*.powr-form-builder {
   width: 100%;
 }
-#form-wrapper {
-  padding: 0;
+.*/
+
+.sidebyside {
+  flex-wrap: wrap;
 }
+
 .parallax-img-1::after {
   background-image: linear-gradient(to top, transparent 90%, white),
                     url("/img/grapes.jpg");
+}
+h2.label {
+  margin-bottom: 0;
+}
+form {
+  margin-top: calc(var(--content-padding) * 2);
+}
+input[type="submit"] {
+  padding: calc(var(--content-padding) / 2) var(--content-padding);
+  background: none;
+  font-weight: bold;
+  border: 2px solid currentColor;
+  cursor: pointer;
+  margin-top: var(--content-padding);
+}
+input {
+  font: inherit;
+  color: currentColor;
+  border-radius: 3px;
+  border: 2px solid #eee;
+  margin-right: 8px;
+}
+input[type="text"], input[type="email"] {
+  padding: 4px 8px;
+  min-width: 400px;
+}
+label {
+  margin-right: var(--content-padding);
+}
+.rsvp_answer {
+  font-weight: 600;
+}
+#meal_info input {
+  padding: calc(var(--content-padding) / 2);
+  min-width: 50%;
+}
+.border-top {
+  border-top: 1px solid #eee;
+  padding-top: var(--content-padding);
+}
+#section_menu_guest1 {
+  margin-right: calc(var(--content-padding) * 2);
+}
+#section_menu_guest1,
+#section_menu_guest2 {
+  min-width: 300px;
+}
+.sidebyside input[type="text"] {
+  width: 100%;
 }
 </style>
 {% endblock %}
@@ -20,10 +72,88 @@
 {% block content %}
 
 <section class="top_section seethrough">
-  <div id="form-wrapper" class="content-width box shadow">
-    <div class="powr-form-builder" id="50ec0ebd_1475430451"></div>
+  <div class="content-width box shadow">
+    <h2 class="label">RSVP</h2>
+    <h3>Kindly reply by June 10, 2017</h3>
+    <form action="/rsvp" method="post">
+      <p>
+        <input type="text" name="name"
+               placeholder="Guest First Name and Last Name(s)" autofocus required>
+      </p>
+      <p class="rsvp_answer">
+        <label><input type="radio" name="rsvp" value="yes" required>Accepts with Pleasure</label>
+        <label><input type="radio" name="rsvp" value="no" required>Declines with Regret</label>
+      </p>
+      <div id="attending_info" class="border-top" hidden>
+        <div id="meal_info">
+          <h3>Meal Selection</h3>
+          <div class="layout horizontal sidebyside">
+            <div id="section_menu_guest1">
+              <div>
+                <input type="text" name="guest1_name"
+                       placeholder="Guest #1 Name" required disabled>
+              </div>
+              <p>
+                <label><input type="radio" name="guest1_meal" value="beef" required disabled>Grilled Bistro Filet (Beef) - Gluten free</label><br>
+                <label><input type="radio" name="guest1_meal" value="fish" required disabled>Crispy Skin Artic Char (Fish)</label><br>
+                <label><input type="radio" name="guest1_meal" value="ravioli" required disabled>Mushroom Ravioli (Pasta) - Vegetarian</label>
+                <!-- <small>Need help deciding? <a href="/details">View menu details</a>.</small> -->
+              </p>
+              <h4>Dietary restrictions:</h4>
+              <p>
+                <label><input type="checkbox" name="guest1_dietary" value="dairy">Dairy free</label>
+                <label><input type="checkbox" name="guest1_dietary" value="vegan">Vegan</label>
+              </p>
+            </div>
+            <div id="section_menu_guest2">
+              <div>
+                <input type="text" name="guest2_name"
+                       placeholder="Guest #2 Name (if applicable)">
+              </div>
+              <p>
+                <label><input type="radio" name="guest2_meal" value="beef" required disabled>Grilled Bistro Filet (Beef) - Gluten free</label><br>
+                <label><input type="radio" name="guest2_meal" value="fish" required disabled>Crispy Skin Artic Char (Fish)</label><br>
+                <label><input type="radio" name="guest2_meal" value="ravioli" required disabled>Mushroom Ravioli (Pasta) - Vegetarian</label>
+              </p>
+              <h4>Dietary restrictions:</h4>
+              <p>
+                <label><input type="checkbox" name="guest2_dietary" value="dairy">Dairy free</label>
+                <label><input type="checkbox" name="guest2_dietary" value="vegan">Vegan</label>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="border-top">
+          <h3>Hotels / Shuttle Information</h3>
+          <div id="shuttle_info">
+            <div>
+              <p>
+                Would you like to ride one of our chartered shuttles to and from the wedding?
+              </p>
+              <div>
+                <label><input type="radio" name="taking_shuttle" value="yes" required disabled>Yes, please.</label>
+                <label><input type="radio" name="taking_shuttle" value="no" required disabled>No, thanks.</label>
+              </div>
+            </div>
+            <p>Please enter your email address. We will send out shuttle pickup information when it is ready.</p>
+            <p><input type="email" placeholder="Email address" name="shuttle_email"></p>
+          </div>
+          <div>
+            <p>Where will you be staying?</p>
+            <div>
+              <label><input type="radio" name="hotel" value="hotel1" required disabled>Hotel option 1</label><br>
+              <label><input type="radio" name="hotel" value="hotel2" required disabled>Hotel option 2</label><br>
+              <label><input type="radio" name="hotel" value="hotel3" required disabled>Hotel option 3</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="border-top"><input type="submit" value="RSVP!"></p>
+    </form>
   </div>
 </section>
+
+<!-- <div class="powr-form-builder" id="50ec0ebd_1475430451"></div> -->
 
 <section class="parallax-img fixed-bg parallax-img-1 seethrough">
   <div class="content-width">
@@ -35,10 +165,54 @@
 
 
 {% block scripts %}
-<script src="//www.powr.io/powr.js" external-type="html" async></script>
+<!-- <script src="//www.powr.io/powr.js" external-type="html" async></script> -->
 <script>
 (function(exports) {
 'use strict';
+
+const form = document.forms[0];
+
+// form.rsvp[0].setCustomValidity('asdf');
+
+form.addEventListener('change', e => {
+  let section;
+
+  switch (e.target.name) {
+    case 'rsvp':
+      const attending = form.rsvp.value === 'yes';
+      section = document.querySelector('#attending_info');
+      Array.from(section.querySelectorAll('input')).forEach(input => {
+        if (input.name.indexOf('guest2') === 0) {
+          return;
+        }
+        input.disabled = !attending;
+      });
+      section.hidden = !attending;
+      break;
+    case 'guest2_name':
+      const guest2Attending = Boolean(form.guest2_name.value.length);
+      section = document.querySelector('#section_menu_guest2');
+      Array.from(section.querySelectorAll('input')).forEach(input => {
+        if (input.name === 'guest2_name') {
+          return;
+        } else if (input.name !== 'guest2_dietary') {
+          input.required = guest2Attending;
+        }
+        input.disabled = !guest2Attending;
+      });
+      break;
+    default:
+      break;
+  }
+});
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const submitForm = confirm('Submit RSVP?');
+  if (submitForm) {
+    form.submit();
+  }
+});
 
 })(window);
 </script>
