@@ -78,6 +78,10 @@ section p {
   background-image: url("/img/adventures/sandiego.jpg");
 }
 
+.parallax-img-2::after {
+  background-image: url("/img/adventures/taj.jpg");
+}
+
 @media (min-width: 768px) {
   .details {
     width: 40%;
@@ -115,8 +119,8 @@ section p {
     <div class="details box shadow">
       <h3 class="label details-label details-when">When</h3>
       <p class="indent">
-        Saturday July 8, 2017<br>
-        Ceremony begins 4:30pm
+        Saturday, July 8, 2017<br>
+        4 - 11pm
       </p>
       <h3 class="label details-label details-where">Where</h3>
       <p class="indent">
@@ -132,6 +136,27 @@ section p {
 </section>
 
 <section class="parallax-img fixed-bg parallax-img-1" style="min-height:auto">
+  <div class="content-width">
+
+  </div>
+</section>
+
+<section>
+  <div class="content-width">
+    <h2 class="section_title">Detailed information</h2>
+    <h3 class="subsection_title">Ceremony &amp; Reception</h3>
+    <p>The ceremony and reception will be held at the begins at Tyge William Cellars ( <a href="/directions">directions</a>).</p>
+    <h3 class="subsection_title">Transportation</h3>
+    <p>We will have a <a href="/directions">shuttle service</a> to and from the hotels to the venue. Should you chose to drive, there is plenty of parking available at the winery. You can also take Uber, but service may be limited.</p>
+    <h3 class="subsection_title">Attire</h3>
+    <p>We ask that you wear semi-formal attire.</p>
+    <p>The ceremony and reception will both take place outdoors. July in Sonoma should be around 85-90° during the daytime, and cooler in the evenings (around 53°-60°). Sunglasses are  must!</p>
+    <h3 class="subsection_title">Misc</h3>
+    <p>We ask that you kindly leave the little ones at home.</p>
+  </div>
+</section>
+
+<section class="parallax-img fixed-bg parallax-img-2" style="min-height:500px">
   <div class="content-width">
 
   </div>
@@ -169,6 +194,8 @@ function onScroll(scrollTop) {
     chevron.classList.add('bounce');
   }
 }
+
+exports.swapBackgroundImagesWhenInView();
 
 exports.onScroll = onScroll;
 

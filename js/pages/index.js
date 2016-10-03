@@ -28,18 +28,6 @@ function lazyLoadImagesWhenVisible() {
   Array.from(imgs).forEach(img => observer.observe(img));
 }
 
-function swapBackgroundImagesWhenInView() {
-  const imgs = Array.from(document.querySelectorAll('.parallax-img'));
-
-  const observer = new IntersectionObserver((records, observer) => {
-    for (const record of records) {
-      record.target.classList.toggle('show', record.intersectionRatio);
-    }
-  });
-
-  imgs.forEach(img => observer.observe(img));
-}
-
 function initGallery() {
   const container = document.querySelector('#adventures');
   const galleryImgs = Array.from(container.querySelectorAll('img'));
@@ -145,7 +133,7 @@ function initGallery() {
 }
 
 lazyLoadImagesWhenVisible();
-swapBackgroundImagesWhenInView();
+exports.swapBackgroundImagesWhenInView();
 initGallery();
 
 exports.onScroll = onScroll;

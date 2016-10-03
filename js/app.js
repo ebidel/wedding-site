@@ -82,6 +82,18 @@ function disableElementOnScroll(container, callback=null, enableAfter=250) {
   }, enableAfter);
 }
 
+function swapBackgroundImagesWhenInView() {
+  const imgs = Array.from(document.querySelectorAll('.parallax-img'));
+
+  const observer = new IntersectionObserver((records, observer) => {
+    for (const record of records) {
+      record.target.classList.toggle('show', record.intersectionRatio);
+    }
+  });
+
+  imgs.forEach(img => observer.observe(img));
+}
+
 window.addEventListener('scroll', function(e) {
   navbar.classList.toggle('colorize', scroller.scrollTop > 0);
 
@@ -158,6 +170,7 @@ setMaxHeight(mediaQueryList);
 
 exports.smoothScroll = smoothScroll;
 exports.disableElementOnScroll = disableElementOnScroll;
+exports.swapBackgroundImagesWhenInView = swapBackgroundImagesWhenInView;
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
