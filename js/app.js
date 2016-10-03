@@ -89,6 +89,10 @@ function swapBackgroundImagesWhenInView() {
     for (const record of records) {
       record.target.classList.toggle('show', record.intersectionRatio);
     }
+    // Ensure the top image is showing when scrolling back to the top.
+    if (scroller.scrollTop < window.innerHeight / 2) {
+      imgs[0].classList.add('show');
+    }
   });
 
   imgs.forEach(img => observer.observe(img));
