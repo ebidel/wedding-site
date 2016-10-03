@@ -1,10 +1,10 @@
 {% set navigation_bar = [
-  ('/details', 'Details', false, None),
-  ('/directions', 'Getting here', false, None),
-  ('/things', 'Things to Do', false, None),
-  ('/hotels', 'Hotels', true, 'Coming soon'),
-  ('/gifts', 'Gifts', true, 'Coming soon'),
-  ('/rsvp', 'RSVP', true, 'Coming soon')
+  ('/details', 'Details', false, None, false),
+  ('/directions', 'Getting here', false, None, false),
+  ('/things', 'Things to Do', false, None, false),
+  ('https://www.zola.com/registry/laubidelman', 'Gifts', false, None, true),
+  ('/hotels', 'Hotels', true, 'Coming soon', false),
+  ('/rsvp', 'RSVP', true, 'Coming soon', false)
 ] -%}
 
 <div class="navbar">
@@ -16,8 +16,8 @@
     </svg>
     <a href="/" class="flex names">Jackie<span class="ampersand">&hearts;</span>Eric</h1>
     <a href="/" class="flex home_link">Home</a>
-    {% for href, caption, disable, title in navigation_bar -%}
-      <a href="{{ href|e }}" {% if href|e == active_page %}class="active"{% endif %} {% if disable %}disabled{% endif %} {% if title %}title="{{title|e}}"{% endif %}>{{caption|e}}</a>
+    {% for href, caption, disable, title, external in navigation_bar -%}
+      <a href="{{ href|e }}" {% if href|e == active_page %}class="active"{% endif %} {% if disable %}disabled{% endif %} {% if title %}title="{{title|e}}"{% endif %} {% if external %}target="_blank"{% endif %}>{{caption|e}}</a>
     {% endfor -%}
   </nav>
 </div>
