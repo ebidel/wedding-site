@@ -46,6 +46,10 @@ a {
   text-decoration: none;
 }
 
+.main-content a {
+  font-weight: 600;
+  color: var(--pink-color);
+}
 .main-content a:hover {
   text-decoration: underline;
 }
@@ -162,7 +166,7 @@ section .subsection_title {
 
 .navbar a:hover {
   /*border-bottom: 2px solid currentColor;*/
-  color: var(--pink-color)
+  color: var(--pink-color);
 }
 
 .navbar .names {

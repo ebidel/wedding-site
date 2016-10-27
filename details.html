@@ -1,6 +1,6 @@
 {% extends "partials/base.html" %}
 
-{% block title %}The Big Day{% endblock %}
+{% block title %}Wedding details{% endblock %}
 
 {% block head %}
 <style>
@@ -15,6 +15,9 @@ section p {
   line-height: 40px;
 }
 
+#details a {
+  color: currentColor;
+}
 /*.map_wrapper {
   padding: var(--content-padding);
   background-color: #fff;
@@ -120,12 +123,12 @@ section p {
       <h3 class="label details-label details-when">When</h3>
       <p class="indent">
         Saturday, July 8, 2017<br>
-        4 - 11pm
+        <!-- 4 - 11pm -->
       </p>
       <h3 class="label details-label details-where">Where</h3>
       <p class="indent">
         <a href="http://www.cornerstonesonoma.com/tyge-cellars-barn/" rel="noopener" target="_blank">Tyge William Cellars</a><br>
-        150 Wagner Rd, Sonoma, CA 95476
+        150 Wagner Rd, Sonoma, California 95476
       </p>
       <div class="indent">
         <a href="/directions" class="small">Get directions &rsaquo;</a>
@@ -143,16 +146,18 @@ section p {
 
 <section>
   <div class="content-width">
-    <h2 class="section_title">Detailed information</h2>
+    <h2 class="section_title">Wedding details</h2>
+
     <h3 class="subsection_title">Ceremony &amp; Reception</h3>
-    <p>The ceremony and reception will be held at at Tyge William Cellars ( see <a href="/directions">directions</a> ).</p>
-    <h3 class="subsection_title">Transportation</h3>
-    <p>We will have a <a href="/directions">shuttle service</a> to and from the hotels to the venue. Should you chose to drive, there is plenty of parking available at the winery. You can also take Uber, but service may be limited.</p>
+    <p>The wedding ceremony and reception will be hosted at <a href="/directions">Tyge William Cellars in Sonoma, California</a>. We kindly ask the wedding is adults only.</p>
+
+    <h3 class="subsection_title">Shuttle service</h3>
+    <p>A shuttle service will provided between from the <a href="http://www.marriott.com/hotels/travel/sfonv-courtyard-novato-marin-sonoma/" target="_blank">Courtyard Marriott</a> in Novato and the <a href="http://www.napavalleyinns.com/" target="_blank">Hawthorne Suites by Wydham</a> in Napa Valley. If you choose to stay in other <a href="/hotels">recommended accommodations</a>, you may take an Uber or drive yourself. Uber service is reliable in the downtown Sonoma area. There will be an open bar, so please drive responsibly if you choose to do so.</p>
+    <p>Shuttle Service times will be updated here when available. </p>
+
     <h3 class="subsection_title">Attire</h3>
-    <p>We ask that you wear semi-formal attire.</p>
-    <p>The ceremony and reception will both take place outdoors. July in Sonoma should be around 85-90° during the daytime, and cooler in the evenings (around 53-60°). Sunglasses are  must!</p>
-    <h3 class="subsection_title">Misc</h3>
-    <p>We ask that you kindly leave the little ones at home.</p>
+    <p>The ceremony and and reception will take place outdoors. We expect the weather to be 85 - 90° during the day and 50°- 55° during the evening. Guests will be walking on grass at the wedding, so please leave the stilettos at home. Don’t forget your sunglasses, and a shawl for the ladies as it may be cool in the evening.</p>
+    <p>Semi-formal attire is requested.</p>
   </div>
 </section>
 
@@ -162,7 +167,7 @@ section p {
   </div>
 </section>
 
-<section id="wedding_party">
+<!-- <section id="wedding_party">
   <div class="content-width">
     <h2 class="section_title">Wedding party</h2>
     <h3 class="subsection_title">Bridesmaids</h3>
@@ -174,7 +179,7 @@ section p {
       Coming soon...
     </p>
   </div>
-</section>
+</section> -->
 
 <!-- <div class="background-photo"></div> -->
 

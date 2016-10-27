@@ -1,0 +1,209 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Accommodations{% endblock %}
+
+{% block head %}
+<style>
+.parallax-img-1::after {
+   background-image: url("img/adventures/greece.jpg");
+}
+.details-hotel::before {
+  background: url(/img/icons/hotel.svg) no-repeat 50% 50%;
+}
+ul {
+  line-height: 2;
+}
+
+.cols > p {
+  flex: 1 0 25%;
+  min-width: 200px;
+  margin-right: var(--content-padding);
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#hotel-details ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.hotel-name {
+  font-weight: 300;
+  margin: calc(var(--content-padding) * 2) 0;
+  line-height: 1.6;
+}
+
+.indent {
+  flex: 1 0 40%;
+  min-width: 250px;
+  margin-right: calc(var(--content-padding) * 2);
+}
+.indent:last-child {
+  margin-right: 0;
+}
+
+.box {
+  background-color: rgba(255,255,255,0.93);
+}
+
+section {
+  padding-bottom: 0;
+}
+section:not(.top_section) .box {
+  padding: calc(var(--content-padding) * 2);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="top_section seethrough">
+  <div class="content-width">
+    <div class="box shadow">
+      <h3 class="label details-label details-hotel">Accommodations</h3>
+      <p>We highly recommend booking accommodations as early as possible. Hotel prices can be very expensive in wine country, so please book early to avoid the high prices.</p>
+      <p>If you have any questions about accommodation options at anytime, feel free to reach us at laubidelman@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+<section id="hotel-details" class="seethrough">
+  <div class="content-width">
+    <div class="box shadow">
+      <!-- <h2 class="section_title">Hotel Room Blocks</h2> -->
+
+      <h3 class="subsection_title">Hotel Room Blocks</h3>
+      <p>For guest convenience, we negotiated discounted rooms at two hotels. Shuttle service to and from the wedding will be provided from both hotels.</p>
+
+      <div class="layout horizontal wrap">
+        <div class="indent">
+          <div class="hotel-name center">
+            <a href="http://www.napavalleyinns.com/" target="_blank">Hawthorne Suites by Wyndham in Napa Valley</a><br>
+            314 Soscol Avenue, Napa, CA 94559
+            <p><b>$197/night. 2 night minimum. Breakfast included.</b></p>
+          </div>
+
+          <p>To book the discounted rate, call 707-226-1878 and reference the "Lau Bidelman" wedding.
+          </p>
+
+          <p>The Hawthorne Suites by Wyndham is centrally located in napa valley, with easy access to countless wineries. If you plan to visit Napa Valley during your stay, we recommend staying in this hotel.</p>
+
+          <ul>
+            <li><b>~23 min</b> to Wedding Site (shuttle provided)</li>
+            <li><b>~70 min</b> to San Francisco (via Bay Bridge)</li>
+            <li><b>~75 min</b> to SFO Airport (via Bay Bridge)</li>
+          </ul>
+        </div>
+
+        <div class="indent">
+          <div class="hotel-name center">
+            <a href="http://www.marriott.com/hotels/travel/sfonv-courtyard-novato-marin-sonoma/" target="_blank">Courtyard Marriott in Marin Sonoma</a><br>
+            1400 N Hamilton Parkway Novato, CA 94949
+            <p><b>$210/night. No minimum nights.</b></p>
+          </div>
+
+          <p>
+          To book the discounted rate, call 415-883-8950 and reference the "Lau Bidelman" wedding.
+          </p>
+
+          <p>The Courtyard Marriott is centrally located between San Francisco and the wedding venue. If you plan to primarily visit San Francisco during your stay, or only require one night of accommodation, we recommend staying in this hotel.</p>
+
+          <ul>
+            <li><b>~18 min</b> to Wedding Site (shuttle provided)</li>
+            <li><b>~41 min</b> to San Francisco (via Golden Gate Bridge)</li>
+            <li><b>~51 min</b> to SFO Airport (via Golden Gate Bridge)</li>
+          </ul>
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<section class="seethrough">
+  <div class="content-width">
+    <div class="box shadow">
+
+      <h3 class="subsection_title">Additional Accommodation Options</h3>
+      <p>There are dozens of accommodation options in the Bay Area that you may choose from. Below are additional recommendations by us. If you choose to stay in an alternative hotel, we suggest taking an Uber to the wedding or to the nearest shuttle stop. You may also drive and park to the wedding, please drive safely and be aware of the open bar.</p>
+
+      <h4 class="center">2-3 Star Hotels</h4>
+
+      <div class="cols layout horizontal justified wrap">
+
+        <p><a href="http://www.sonomavalleyinn.com/" target="_blank">Best Western Sonoma Valley Inn</a><br>
+        $419/night. 2 night minimum<br>
+        ~10 min to wedding venue</p>
+
+        <p><a href="http://www.sonomahotel.com/" target="_blank">Sonoma Hotel</a><br>
+        $220/night<br>
+        ~12 min to wedding venue</p>
+
+        <p><a href="http://sonomacreekinn.com/" target="_blank">Sonoma Creek Inn</a><br>
+        $205/night<br>
+        ~12 min to wedding venue</p>
+
+        <p><a href="https://www.wyndhamhotels.com/days-inn/novato-california/days-inn-novato-san-francisco/overview?CID=LC:DI:20160927:RIO:Local:SM-dipaci" target="_blank">Days Inn Novato</a><br>
+        $136/night<br>
+        ~20 min to wedding venue<br>
+        ~9 min to nearest wedding shuttle stop</p>
+
+        <p><a href="http://www.innmarin.com/" target="_blank">Inn Marin</a><br>
+        $186/night<br>
+        ~19 min to wedding venue<br>
+        ~5 min to nearest wedding shuttle stop</p>
+
+        <p><a href="https://www.bestwestern.com/en_US/book/hotel-details.05548.html?iata=00171880&ssob=BLBWI0004G&cid=BLBWI0004G:google:gmb:05548" target="_blank">Best Western Oaks Novato</a><br>
+        $206/night<br>
+        ~19 min to wedding venue<br>
+        ~5 min to nearest wedding shuttle stop</p>
+      </div>
+
+      <h4 class="center">4-5 Star Hotels</h4>
+
+      <div class="cols layout horizontal justified wrap">
+        <p><a href="http://www.marriott.com/hotels/travel/sfols-the-lodge-at-sonoma-renaissance-resort-and-spa/" target="_blank">The Lodge at Sonoma Renaissance Resort &amp; Spa</a><br>
+        $485/night<br>
+        ~6 minutes from wedding venue</p>
+
+        <p><a href="http://www.innatsonoma.com/" target="_blank">The Inn at Sonoma, a Four Sister's Inn</a><br>
+        $359/night<br>
+        ~9 minutes from wedding venue</p>
+
+        <p><a href="https://www.macarthurplace.com/index.php" target="_blank">MacArthur Place</a><br>
+        $499/night</p>
+
+        <p><a href="http://www.fairmont.com/sonoma/" target="_blank">Fairmont Sonoma Inn &amp; Spa</a><br>
+        $701/night<br>
+        ~14 minutes from wedding venue</p>
+
+        <p><a href="http://www.westinnapa.com/" target="_blank">The Westin Verasa Napa</a><br>
+        $599/night<br>
+        ~22 min to wedding venue<br>
+        ~6 min to nearest wedding shuttle stop</p>
+
+        <p><a href="https://napa.andaz.hyatt.com/en/hotel/home.html" target="_blank">Hyatt Andaz Napa</a><br>
+        $489/night<br>
+        ~19 min to wedding venue<br>
+        ~7 min to nearest wedding shuttle stop</p>
+      </div>
+
+      <h4>Alternative options</h4>
+
+      <p>If you choose not to stay in a hotel, <a href="https://www.airbnb.com/" target="_blank">AirBNB</a> and <a href="https://www.vrbo.com/?k_clickid=4b4f6c2f-e4cb-4a13-b430-f75bd89bb5cb&ksid=4b4f6c2f-e4cb-4a13-b430-f75bd89bb5cb&ksprof_id=213&ksaffcode=738082&ksdevice=c&gclid=Cj0KEQjwhbzABRDHw_i4q6fXoLIBEiQANZKGW5yRqpMtJUnCMc3eSwNQMghRhyy1vNgmvx2DHIa9ppoaArFd8P8HAQ" target="_blank">VRBO</a> also has plentiful vacation home rentals available to choose from.</p>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="parallax-img fixed-bg parallax-img-1">
+  <div class="content-width">
+
+
+  </div>
+</section>
+
+{% endblock %}
