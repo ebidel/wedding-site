@@ -20,11 +20,19 @@
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js', {scope:'./'}).then(function(reg) {
-        if (reg.installing) {
-          // Force refresh page so service worker has control and smaller web
-          // images are downloaded.
-          location.reload();
-        }
+        reg.onupdatefound = function() {
+          reg.installing.onstatechange = function(e) {
+            if (e.target.state === 'installed') {
+              // If page isn't controlled by sw, force refresh so it can control
+              // the page and server smaller images are downloaded.
+              if (!navigator.serviceWorker.controller) {
+                location.reload();
+              }
+            }
+          };
+        };
+      }).catch(function(e) {
+        console.error('Error during service worker registration:', e);
       });
     }
   </script>
