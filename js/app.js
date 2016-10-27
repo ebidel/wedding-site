@@ -116,6 +116,13 @@ navbar.addEventListener('click', e => {
   }
 });
 
+document.addEventListener('click', e => {
+  if (window.matchMedia('(max-width: 767px)').matches &&
+      navbar.classList.contains('open') && !navbar.contains(e.target)) {
+    navbar.classList.remove('open');
+  }
+});
+
 // function hasWebPSupport() {
 //   return new Promise((resolve, reject) => {
 //     const img = document.createElement('img');
