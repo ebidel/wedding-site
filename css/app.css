@@ -131,7 +131,7 @@ section .subsection_title {
   width: 100%;
   height: var(--navbar-height);
   transition: background 200ms ease-in-out;
-  will-change: color, background-color;
+  will-change: transform, color, background-color;
   z-index: 1;
   -webkit-font-smoothing: initial;
   /*background: linear-gradient(to top, transparent, transparent);*/
