@@ -3,6 +3,9 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block head %}
+<link rel="preload" href="/img/card2-mobile.png" media="(max-width: 767px)">
+<link rel="preload" href="/img/card2.png" media="(min-width: 768px)">
+
 <style>
 :root {
   --card-size-small: 164px;
@@ -54,6 +57,7 @@
   background: url("/img/icons/whale.png") no-repeat 50% 50%;
   background-color: var(--cloud-grey);
   background-size: 75px;
+  will-change: transform;
 }
 
 #adventures .card summary {
@@ -650,6 +654,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/js/dist/intersection-observer.min.js"></script>
-<script src="/js/dist/pages/index.min.js" async></script>
+<script src="/js/dist/intersection-observer.min.js" defer></script>
+<script src="/js/dist/pages/index.min.js" defer></script>
 {% endblock %}
