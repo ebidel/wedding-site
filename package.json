@@ -8,7 +8,7 @@
     "postinstall": "gulp"
   },
   "author": "Eric Bidelman <ebidel@>",
-  "license": "Apach2",
+  "license": "Apache-2.0",
   "dependencies": {
     "intersection-observer": "^0.1.1"
   },
