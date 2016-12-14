@@ -177,7 +177,6 @@ section .subsection_title {
 }
 
 .navbar .ampersand {
-  margin: 0 10px 0 25px;
   margin: 0 4px 0 5px;
   text-shadow: none;
   font-size: 60%;
