@@ -1,0 +1,110 @@
+{% extends "partials/base.html" %}
+
+{% block title %}RSVP list{% endblock %}
+
+{% block head %}
+<style>
+.metrics {
+  font-weight: 600;
+  padding: 8px;
+  border: 1px solid #eee;
+  background-color: #fff;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /*max-width: 40%;*/
+}
+.metrics span {
+  font-weight: inherit;
+}
+.guests {
+  display: flex;
+}
+.guests ul {
+  margin: 0;
+  margin-right: 32px;
+  padding-left: 24px;
+  list-style: none;
+  line-height: 1.4;
+}
+.party_name {
+  margin-top: 16px;
+}
+.party_meta {
+  margin: 16px 24px;
+}
+.yes {
+  color: #43A047;
+  font-weight: 500;
+}
+.no {
+  color: #E53935;
+  font-weight: 500;
+}
+.hotel_label {
+  background: url(/img/icons/hotel.svg) no-repeat 0% 50%;
+}
+.dinner_label {
+  background: url(/img/icons/dinner.svg) no-repeat 0% 50%;
+}
+.shuttle_label {
+  background: url(/img/icons/shuttle.svg) no-repeat 0% 50%;
+}
+.badge_label {
+  background: url(/img/icons/badge.svg) no-repeat 0% 50%;
+}
+.label {
+  padding-left: 30px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section>
+  <div class="content-width">
+    <h2 class="metrics">
+      <span>Yes: <span class="yes">{{num_yes}}</span> <span>({{num_yes / responses|length * 100}}%)</span></span>
+      <span>No: <span class="no">{{num_no}}</span></span>
+      <span>Total: {{responses|length}}</span>
+      <img src="https://chart.googleapis.com/chart?cht=p&chd=t:{{num_yes / responses|length}},{{num_no / responses|length}}&chs=250x100&chl=Yes|No&chco=43A047|E53935">
+    </h2>
+    {% for resp in responses %}
+      {% if resp.attending %}
+        <div class="party_name"><h2>{{loop.revindex}}. {{resp.guests[0].name}}</h2></div>
+        <div>
+          <div class="guests">
+            {% for guest in resp.guests %}
+              <ul class="guest">
+                <li class="badge_label label">{{guest.name}}</li>
+                <li class="dinner_label label">{{guest.meal|capitalize}}</li>
+                {% if guest.dairy_free %}<li>Dairy-free</li>{% endif %}
+                {% if guest.vegan %}<li><span class="vegan">Vegan</span></li>{% endif %}
+              </ul>
+            {% endfor %}
+          </div>
+          <div class="party_meta">
+            <div class="hotel_label label">{{resp.hotel|capitalize}}</div>
+            {% if resp.taking_shuttle %}<div class="shuttle_label label">Yes</div>{% endif %}
+            {% if resp.shuttle_email %}<div>{{resp.shuttle_email}}</div>{% endif %}
+          </div>
+        </div>
+      {% else %}
+        <h2>{{loop.revindex}}. <s>{{resp.guests[0].name}}</s></h2>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function(exports) {
+'use strict';
+
+
+})(window);
+</script>
+{% endblock %}

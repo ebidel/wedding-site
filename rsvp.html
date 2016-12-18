@@ -14,7 +14,7 @@
 }
 
 .parallax-img-1::after {
-  background-image: linear-gradient(to top, transparent 90%, white),
+  background-image: linear-gradient(to top, transparent 90%, rgba(255,255,255,0.8)),
                     url("/img/grapes.jpg");
 }
 h2.label {
@@ -66,6 +66,16 @@ label {
 .sidebyside input[type="text"] {
   width: 100%;
 }
+
+input[disabled] {
+  background-color: #eee;
+  border: 1px solid #ddd;
+}
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
 </style>
 {% endblock %}
 
@@ -73,82 +83,158 @@ label {
 
 <section class="top_section seethrough">
   <div class="content-width box shadow">
-    <h2 class="label">RSVP</h2>
-    <h3>Kindly reply by June 10, 2017</h3>
+
+    {% if rsvp %}
+      <h2 class="label">Thanks!</h2>
+      <h3>We've received your RSVP. If you need to make changes, please email <b>laubidelman@gmail.com</b>.</h3>
+    {% else %}
+      <h2 class="label">RSVP</h2>
+      <h3>Kindly reply by May 1, 2017</h3>
+    {% endif %}
+
     <form action="/rsvp" method="post">
-      <p>
-        <input type="text" name="name"
-               placeholder="Guest First Name and Last Name(s)" autofocus required>
-      </p>
-      <p class="rsvp_answer">
-        <label><input type="radio" name="rsvp" value="yes" required>Accepts with Pleasure</label>
-        <label><input type="radio" name="rsvp" value="no" required>Declines with Regret</label>
-      </p>
-      <div id="attending_info" class="border-top" hidden>
-        <div id="meal_info">
-          <h3>Meal Selection</h3>
-          <div class="layout horizontal sidebyside">
-            <div id="section_menu_guest1">
-              <div>
-                <input type="text" name="guest1_name"
-                       placeholder="Guest #1 Name" required disabled>
+      {% if rsvp %}
+        <fieldset disabled>
+      {% endif %}
+        <p>
+          <input type="text" name="party_name" placeholder="Enter your name" autofocus required
+                 value="{{rsvp.party_name}}" {% if rsvp %}disabled{% endif %}>
+        </p>
+        <p class="rsvp_answer">
+          <label><input type="radio" name="rsvp" value="yes" required
+                        {% if rsvp and rsvp.attending %}checked{% endif %}>Accepts with Pleasure</label>
+          <label><input type="radio" name="rsvp" value="no" required
+                        {% if rsvp and not rsvp.attending %}checked{% endif %}>Declines with Regret</label>
+        </p>
+        <div id="attending_info" class="border-top" {% if not rsvp or not rsvp.attending %}hidden{% endif %}>
+          <div id="meal_info">
+            <h3>Entree Selection</h3>
+            <div class="layout horizontal sidebyside">
+              <div id="section_menu_guest1">
+                <div>
+                  <input type="text" name="guest1_name"
+                         placeholder="Guest #1 Full Name" required disabled
+                         {% if rsvp %}value="{{rsvp.guests[0].name}}"{% endif %}>
+                </div>
+                <p>
+                  {% if rsvp %}
+                    <label><input type="radio" name="guest1_meal" value="beef" required disabled
+                                  {% if rsvp and rsvp.guests[0].meal == 'beef' %}checked{% endif %}>Beef - grilled bistro filet (<i>gluten free</i>)</label><br>
+                    <label><input type="radio" name="guest1_meal" value="fish" required disabled
+                                  {% if rsvp and rsvp.guests[0].meal == 'fish' %}checked{% endif %}>Fish - crispy skin artic char</label><br>
+                    <label><input type="radio" name="guest1_meal" value="pasta" required disabled
+                                  {% if rsvp and rsvp.guests[0].meal == 'pasta' %}checked{% endif %}>Pasta - wild mushroom ravioli (<i>vegetarian</i>)</label>
+                  {% else %}
+                    {% for key,val in MEALS|dictsort %}
+                      <label>
+                        <input type="radio" name="guest1_meal" value="{{key}}" required disabled>
+                        {{val}}
+                      </label><br>
+                    {% endfor %}
+                  {% endif %}
+                </p>
+                <h4>Dietary restrictions:</h4>
+                <p>
+                  <label>
+                    <input type="checkbox" name="guest1_dietary" value="dairy"
+                           {% if rsvp and rsvp.guests[0].dairy_free %}checked{% endif %}>dairy-free
+                  </label>
+                  <label>
+                  <label>
+                    <input type="checkbox" name="guest1_dietary" value="vegan"
+                           {% if rsvp and rsvp.guests[0].vegan %}checked{% endif %}>vegan
+                  </label>
+                </p>
               </div>
-              <p>
-                <label><input type="radio" name="guest1_meal" value="beef" required disabled>Grilled Bistro Filet (Beef) - Gluten free</label><br>
-                <label><input type="radio" name="guest1_meal" value="fish" required disabled>Crispy Skin Artic Char (Fish)</label><br>
-                <label><input type="radio" name="guest1_meal" value="ravioli" required disabled>Mushroom Ravioli (Pasta) - Vegetarian</label>
-                <!-- <small>Need help deciding? <a href="/details">View menu details</a>.</small> -->
-              </p>
-              <h4>Dietary restrictions:</h4>
-              <p>
-                <label><input type="checkbox" name="guest1_dietary" value="dairy">Dairy free</label>
-                <label><input type="checkbox" name="guest1_dietary" value="vegan">Vegan</label>
-              </p>
+              <div id="section_menu_guest2">
+                <div>
+                  {% if rsvp.guests|length > 1 %}
+                    <input type="text" name="guest2_name"
+                           placeholder="Guest #2 Name (if applicable and your invitation indicated)"
+                           value="{{rsvp.guests[1].name}}" disabled>
+                  {% else %}
+                    <input type="text" name="guest2_name"
+                           placeholder="Guest #2 Name (if applicable and your invitation indicated)"
+                           {% if rsvp %}disabled{% endif %}>
+                  {% endif %}
+                </div>
+                <p>
+                  {% if rsvp.guests|length > 1 %}
+                    {% for key,val in MEALS|dictsort %}
+                      <label>
+                        <input type="radio" name="guest2_meal" value="{{key}}" required disabled
+                               {% if rsvp.guests[1].meal == key %}checked{% endif %}>
+                        {{val}}
+                      </label><br>
+                    {% endfor %}
+                  {% else %}
+                    {% for key,val in MEALS|dictsort %}
+                      <label>
+                        <input type="radio" name="guest2_meal" value="{{key}}" required disabled>
+                        {{val}}
+                      </label><br>
+                    {% endfor %}
+                  {% endif %}
+                </p>
+                <h4>Dietary restrictions:</h4>
+                <p>
+                  {% if rsvp.guests|length > 1 %}
+                    <label>
+                      <input type="checkbox" name="guest2_dietary" value="dairy"
+                             {% if rsvp.guests[1].dairy_free %}checked{% endif %}>dairy-free
+                    </label>
+                    <label>
+                    <label>
+                      <input type="checkbox" name="guest2_dietary" value="vegan"
+                             {% if rsvp.guests[1].vegan %}checked{% endif %}>vegan
+                    </label>
+                  {% else %}
+                    <label>
+                      <input type="checkbox" name="guest2_dietary" value="dairy">dairy-free
+                    </label>
+                    <label>
+                    <label>
+                      <input type="checkbox" name="guest2_dietary" value="vegan">vegan
+                    </label>
+                  {% endif %}
+                </p>
+              </div>
             </div>
-            <div id="section_menu_guest2">
+          </div>
+          <div class="border-top">
+            <h3>Hotels / Shuttle Information</h3>
+            <div>
+              <p>Where will you be staying?</p>
               <div>
-                <input type="text" name="guest2_name"
-                       placeholder="Guest #2 Name (if applicable)">
+                {% for key,val in HOTELS|dictsort %}
+                  <label><input type="radio" name="hotel" value="{{key}}" required disabled
+                    {% if rsvp and rsvp.hotel == key %}checked{% endif %}>{{val}}</label><br>
+                {% endfor %}
               </div>
-              <p>
-                <label><input type="radio" name="guest2_meal" value="beef" required disabled>Grilled Bistro Filet (Beef) - Gluten free</label><br>
-                <label><input type="radio" name="guest2_meal" value="fish" required disabled>Crispy Skin Artic Char (Fish)</label><br>
-                <label><input type="radio" name="guest2_meal" value="ravioli" required disabled>Mushroom Ravioli (Pasta) - Vegetarian</label>
-              </p>
-              <h4>Dietary restrictions:</h4>
-              <p>
-                <label><input type="checkbox" name="guest2_dietary" value="dairy">Dairy free</label>
-                <label><input type="checkbox" name="guest2_dietary" value="vegan">Vegan</label>
-              </p>
+            </div>
+            <div id="shuttle_info">
+              <div>
+                <p>
+                  We will have chartered shuttles to and from Courtyard Marriott and Hawthorne Suites to the wedding venue. Are you interested in riding on the shuttle?
+                </p>
+                <div>
+                  <label><input type="radio" name="taking_shuttle" value="yes" required disabled
+                    {% if rsvp and rsvp.taking_shuttle %}checked{% endif %}>Yes, please.</label>
+                  <label><input type="radio" name="taking_shuttle" value="no" required disabled
+                    {% if rsvp and not rsvp.taking_shuttle %}checked{% endif %}>No, thanks.</label>
+                </div>
+              </div>
+              <p>Please enter your email address. We will send out shuttle pickup information when it is ready.</p>
+              <p><input type="email" placeholder="Email address" name="shuttle_email"
+                        {% if rsvp and rsvp.shuttle_email %}value="{{rsvp.shuttle_email}}"{% endif %}
+                        {% if rsvp %}disabled{% endif %}></p>
             </div>
           </div>
         </div>
-        <div class="border-top">
-          <h3>Hotels / Shuttle Information</h3>
-          <div>
-            <p>Where will you be staying?</p>
-            <div>
-              <label><input type="radio" name="hotel" value="hotel1" required disabled>Hotel option 1</label><br>
-              <label><input type="radio" name="hotel" value="hotel2" required disabled>Hotel option 2</label><br>
-              <label><input type="radio" name="hotel" value="hotel3" required disabled>Hotel option 3</label>
-            </div>
-          </div>
-          <div id="shuttle_info">
-            <div>
-              <p>
-                Would you like to ride one of our chartered shuttles to and from the wedding?
-              </p>
-              <div>
-                <label><input type="radio" name="taking_shuttle" value="yes" required disabled>Yes, please.</label>
-                <label><input type="radio" name="taking_shuttle" value="no" required disabled>No, thanks.</label>
-              </div>
-            </div>
-            <p>Please enter your email address. We will send out shuttle pickup information when it is ready.</p>
-            <p><input type="email" placeholder="Email address" name="shuttle_email"></p>
-          </div>
-        </div>
-      </div>
-      <p class="border-top"><input type="submit" value="RSVP!"></p>
+        {% if not rsvp %}
+          <p class="border-top"><input type="submit" value="RSVP!"></p>
+        {% endif %}
+      {% if rsvp %}</fieldset>{% endif %}
     </form>
   </div>
 </section>
@@ -165,8 +251,6 @@ label {
 
 
 {% block scripts %}
-<!-- <script src="//www.powr.io/powr.js" external-type="html" async></script> -->
-<script src="/js/dist/intersection-observer.min.js"></script>
 <script>
 (function(exports) {
 'use strict';
