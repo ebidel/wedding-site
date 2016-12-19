@@ -87,8 +87,9 @@ MEALS = {
 
 def send_mail(rsvp):
   message = mail.EmailMessage(
-      sender='site@appspot.gserviceaccount.com', subject='New RSVP - %s' % rsvp.party_name)
-  message.to = 'ebidel@gmail.com'#'laubidelman@gmail.com'
+      sender='jackieeric@jackieeric-wedding.appspotmail.com',
+      subject='New RSVP - %s' % rsvp.party_name)
+  message.to = 'laubidelman@gmail.com'
 
   attending_str = 'attending' if rsvp.attending else 'not attending'
   message.body = """
@@ -157,7 +158,10 @@ class RSVPPage(webapp2.RequestHandler):
       ))
     rsvp.put()
 
-    send_mail(rsvp)
+    try:
+      send_mail(rsvp)
+    except:
+      pass
 
     data = {
       'active_page': self.request.path,
