@@ -13,7 +13,6 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /*max-width: 40%;*/
 }
 .metrics span {
   font-weight: inherit;
@@ -26,7 +25,7 @@
   margin-right: 32px;
   padding-left: 24px;
   list-style: none;
-  line-height: 1.4;
+  line-height: 1.8;
 }
 .party_name {
   margin-top: 16px;
@@ -53,6 +52,9 @@
 }
 .badge_label {
   background: url(/img/icons/badge.svg) no-repeat 0% 50%;
+}
+.email_label {
+  background: url(/img/icons/email.svg) no-repeat 0% 50%;
 }
 .label {
   padding-left: 30px;
@@ -87,7 +89,7 @@
           <div class="party_meta">
             <div class="hotel_label label">{{resp.hotel|capitalize}}</div>
             {% if resp.taking_shuttle %}<div class="shuttle_label label">Yes</div>{% endif %}
-            {% if resp.shuttle_email %}<div>{{resp.shuttle_email}}</div>{% endif %}
+            {% if resp.shuttle_email %}<div class="email_label label">{{resp.shuttle_email}}</div>{% endif %}
           </div>
         </div>
       {% else %}
@@ -100,11 +102,11 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
+<!-- <script>
 (function(exports) {
 'use strict';
 
 
 })(window);
-</script>
+</script> -->
 {% endblock %}

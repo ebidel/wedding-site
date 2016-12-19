@@ -9,6 +9,7 @@ import os
 import jinja2
 import webapp2
 
+from google.appengine.api import mail
 from google.appengine.ext import ndb
 
 IS_DEV = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
@@ -84,6 +85,21 @@ MEALS = {
   'pasta': 'Pasta - wild mushroom ravioli (vegetarian)'
 }
 
+def send_mail(rsvp):
+  message = mail.EmailMessage(
+      sender='site@appspot.gserviceaccount.com', subject='New RSVP - %s' % rsvp.party_name)
+  message.to = 'ebidel@gmail.com'#'laubidelman@gmail.com'
+
+  attending_str = 'attending' if rsvp.attending else 'not attending'
+  message.body = """
+%s is %s.
+
+See their details at https://jackieeric.com/rsvp_list.
+""" % (rsvp.party_name, attending_str)
+
+  message.send()
+
+
 class Guest(ndb.Model):
   name = ndb.StringProperty(required=True)
   meal = ndb.StringProperty(choices=['beef', 'fish', 'pasta'], required=True)
@@ -140,6 +156,8 @@ class RSVPPage(webapp2.RequestHandler):
         vegan='vegan' in self.request.params.getall('guest2_dietary'),
       ))
     rsvp.put()
+
+    send_mail(rsvp)
 
     data = {
       'active_page': self.request.path,
