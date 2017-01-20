@@ -13,6 +13,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 .metrics span {
   font-weight: inherit;
@@ -59,6 +60,11 @@
 .label {
   padding-left: 30px;
 }
+@media (max-width: 757px) {
+  .metrics {
+    margin-top: var(--content-padding);
+  }
+}
 </style>
 {% endblock %}
 
@@ -67,9 +73,11 @@
 <section>
   <div class="content-width">
     <h2 class="metrics">
-      <span>Yes: <span class="yes">{{num_yes}}</span> <span>({{num_yes / responses|length * 100}}%)</span></span>
-      <span>No: <span class="no">{{num_no}}</span></span>
-      <span>Total: {{responses|length}}</span>
+      <!-- <div class="metrics-numbers"> -->
+        <span>Yes: <span class="yes">{{num_yes}}</span> <span>({{num_yes / responses|length * 100}}%)</span></span>
+        <span>No: <span class="no">{{num_no}}</span></span>
+        <span>Total: {{responses|length}}</span>
+      <!-- </div> -->
       <img src="https://chart.googleapis.com/chart?cht=p&chd=t:{{num_yes / responses|length}},{{num_no / responses|length}}&chs=250x100&chl=Yes|No&chco=43A047|E53935">
     </h2>
     {% for resp in responses %}
