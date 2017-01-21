@@ -47,11 +47,11 @@ handlers:
   upload: /dexecure-(.*).js
   secure: always
 
-#- url: /manifest.json
-#  static_files: manifest.json
-#  upload: manifest.json
-#  mime_type: application/manifest+json
-#  secure: always
+- url: /manifest.json
+  static_files: manifest.json
+  upload: manifest.json
+  mime_type: application/manifest+json
+  secure: always
 
 - url: /\.well\-known\/acme\-challenge\/.*
   script: letsencrypt.app
