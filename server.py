@@ -7,6 +7,7 @@ __author__ = 'ericbidelman@ (Eric Bidelman)'
 import logging
 import os
 import jinja2
+import json
 import webapp2
 
 from google.appengine.api import mail
@@ -175,7 +176,7 @@ class RSVPPage(webapp2.RequestHandler):
 
 class RSVPAdmin(webapp2.RequestHandler):
 
-  def get(self):
+  def __get_rsvps(self):
     q = RSVP.query().order(-RSVP.date)
     responses = q.fetch()
 
@@ -188,7 +189,28 @@ class RSVPAdmin(webapp2.RequestHandler):
       'num_no': num_no,
     }
 
-    render(self.response, 'rsvp_list.html', data)
+    return data
+
+  def get(self):
+    render(self.response, 'rsvp_list.html', self.__get_rsvps())
+
+  def post(self):
+    auth_header = self.request.headers.get('Authorization')
+
+    if (auth_header is None or
+        auth_header != 'AIzaSyDXAtD9dtwbAG-ttm4exBOUSGRbiZoHvmo'):
+      self.response.set_status(401)
+      return self.response.out.write('{error: "Nice try bud."}')
+
+    rsvps = self.__get_rsvps()
+
+    # JSON encode db results.
+    rsvps['responses'] = [response.to_dict() for response in rsvps['responses']]
+    for resp in rsvps['responses']:
+      resp['date'] = resp['date'].isoformat()
+
+    self.response.headers['Content-Type'] = 'application/json'
+    self.response.out.write(json.dumps(rsvps))
 
 
 app = webapp2.WSGIApplication([
