@@ -4,6 +4,7 @@
 
 __author__ = 'ericbidelman@ (Eric Bidelman)'
 
+import datetime
 import logging
 import os
 import jinja2
@@ -174,47 +175,110 @@ class RSVPPage(webapp2.RequestHandler):
     render(self.response, 'rsvp.html', data)
 
 
+def get_rsvps():
+  q = RSVP.query().order(-RSVP.date)
+  responses = q.fetch()
+
+  num_yes = len(RSVP.query().filter(RSVP.attending == True).fetch())
+  num_no = len(responses) - num_yes
+
+  data = {
+    'responses': responses,
+    'num_yes': num_yes,
+    'num_no': num_no,
+  }
+
+  return data
+
+
 class RSVPAdmin(webapp2.RequestHandler):
 
-  def __get_rsvps(self):
-    q = RSVP.query().order(-RSVP.date)
-    responses = q.fetch()
-
-    num_yes = len(RSVP.query().filter(RSVP.attending == True).fetch())
-    num_no = len(responses) - num_yes
-
-    data = {
-      'responses': responses,
-      'num_yes': num_yes,
-      'num_no': num_no,
-    }
-
-    return data
-
   def get(self):
-    render(self.response, 'rsvp_list.html', self.__get_rsvps())
+   render(self.response, 'rsvp_list.html', get_rsvps())
 
-  def post(self):
+
+class RSVPData(webapp2.RequestHandler):
+
+  def __verify_auth_header(self):
     auth_header = self.request.headers.get('Authorization')
 
-    if (auth_header is None or
-        auth_header != 'AIzaSyDXAtD9dtwbAG-ttm4exBOUSGRbiZoHvmo'):
+    #if (auth_header is None or not 'Basic' in auth_header):
+    #  self.response.set_status(401)
+    #  return self.response.out.write('{error: "Nice try bud."}')
+
+    #username, password = base64.b64decode(auth_header.split(' ')[1])
+
+    api_key = None
+    with open('keyfile.txt', 'r') as f:
+      api_key = f.read().strip()
+
+    if auth_header != api_key:
       self.response.set_status(401)
       return self.response.out.write('{error: "Nice try bud."}')
 
-    rsvps = self.__get_rsvps()
-
-    # JSON encode db results.
-    rsvps['responses'] = [response.to_dict() for response in rsvps['responses']]
-    for resp in rsvps['responses']:
-      resp['date'] = resp['date'].isoformat()
+  def output_json(self, s):
+    resp = {
+      "speech": s,
+      "displayText": s,
+      #"data": {...},
+      #"contextOut": [...],
+      "source": "https://jackieeric.com/rsvp/data"
+    }
 
     self.response.headers['Content-Type'] = 'application/json'
-    self.response.out.write(json.dumps(rsvps))
+    self.response.out.write(json.dumps(resp))
+
+  def __get_days_left(self):
+    today = datetime.date.today()
+    wedding = datetime.date(2017, 7, 8)
+
+    days = (wedding - today).days
+
+    days_str = 'days' if days > 1 else 'day'
+
+    # Before wedding.
+    if days > 0:
+      word = 'are' if days > 1 else 'is'
+      s = 'There %s %s %s until your wedding.' % (word, days, days_str)
+    # After wedding.
+    else:
+      s = "It's been %s %s since your wedding." % (days, days_str)
+
+    return s
+
+  def __get_rsvps(self):
+    rsvps = get_rsvps()
+
+    num_responses = len(rsvps['responses'])
+    percent_attending = (int(rsvps['num_yes']) / num_responses) * 100
+
+    s = ("There are %s responses so far with %s yesses and %s noes. " +
+         "That's a %s%% acceptance rate.") % (num_responses, rsvps['num_yes'],
+                                              rsvps['num_no'], percent_attending)
+    return s
+
+  def post(self):
+    self.__verify_auth_header()
+
+    obj = json.loads(self.request.body)
+
+    action = obj.get('result').get('action')
+    if action == 'get_days':
+      s = self.__get_days_left()
+    else:
+      s = self.__get_rsvps();
+
+    # JSON encode db results.
+    #rsvps['responses'] = [response.to_dict() for response in rsvps['responses']]
+    #for resp in rsvps['responses']:
+    #  resp['date'] = resp['date'].isoformat()
+
+    self.output_json(s)
 
 
 app = webapp2.WSGIApplication([
   ('/rsvp_list', RSVPAdmin),
+  ('/rsvp/data', RSVPData),
   ('/rsvp', RSVPPage),
   ('/(.*)', Site),
 ], debug=IS_DEV)

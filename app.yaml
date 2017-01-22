@@ -57,6 +57,10 @@ handlers:
   script: letsencrypt.app
   secure: always
 
+- url: /rsvp/data
+  script: server.app
+  secure: always
+
 - url: /rsvp_list
   script: server.app
   secure: always

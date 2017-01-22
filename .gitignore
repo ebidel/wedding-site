@@ -4,6 +4,8 @@ npm-debug.log
 
 letsencrypt/
 
+keyfile.txt
+
 # Other generated/common stuff.
 .tmp
 .DS_Store
