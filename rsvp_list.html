@@ -6,17 +6,29 @@
 <style>
 .metrics {
   font-weight: 600;
-  padding: 8px;
+  padding: var(--content-padding);
   border: 1px solid #eee;
   background-color: #fff;
   border-radius: 3px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
+  display: inline-flex;
+}
+.metrics img {
+  width: 200px;
+  height: 100px;
+}
+.metrics-summary {
+  font-size: 20px;
+}
+.metrics-summary > span,
+.metrics_misc > span {
+  margin-right: calc(var(--content-padding) / 2);
 }
 .metrics span {
   font-weight: inherit;
+}
+.metrics_misc {
+  font-size: 12px;
+  margin-top: calc(var(--content-padding) / 2);
 }
 .guests {
   display: flex;
@@ -64,6 +76,17 @@
   .metrics {
     margin-top: var(--content-padding);
   }
+  .metrics-summary {
+    display: flex;
+    flex-direction: column;
+  }
+  .metrics-numbers {
+    flex-wrap: wrap;
+  }
+  .metrics_misc {
+    flex-wrap: wrap;
+    display: flex;
+  }
 }
 </style>
 {% endblock %}
@@ -72,14 +95,24 @@
 
 <section>
   <div class="content-width">
-    <h2 class="metrics">
-      <!-- <div class="metrics-numbers"> -->
-        <span>Yes: <span class="yes">{{num_yes}}</span> <span>({{num_yes / responses|length * 100}}%)</span></span>
-        <span>No: <span class="no">{{num_no}}</span></span>
-        <span>Total: {{responses|length}}</span>
-      <!-- </div> -->
-      <img src="https://chart.googleapis.com/chart?cht=p&chd=t:{{num_yes / responses|length}},{{num_no / responses|length}}&chs=250x100&chl=Yes|No&chco=43A047|E53935">
-    </h2>
+    <div style="display:flex;justify-content: center;">
+      <div class="metrics">
+      <div class="metrics-numbers">
+        <div class="metrics-summary">
+          <span>Yes: <span class="yes">{{num_yes}}</span> <span>({{percent_attending}}%)</span></span>
+          <span>No: <span class="no">{{num_no}}</span></span>
+          <span>Total: {{total_guests}}</span>
+        </div>
+        <div class="metrics_misc">
+          <span>Invite responses: {{num_responses}}</span>
+          <span>Taking shuttle: {{num_taking_shuttle}}</span>
+        </div>
+      </div>
+      <div>
+        <img src="https://chart.googleapis.com/chart?cht=p&chd=t:{{num_yes / total_guests}},{{num_no / total_guests}}&chs=200x100&chl=Yes|No&chco=43A047|E53935">
+      </div>
+    </div>
+    </div>
     {% for resp in responses %}
       {% if resp.attending %}
         <div class="party_name"><h2>{{loop.revindex}}. {{resp.guests[0].name}}</h2></div>

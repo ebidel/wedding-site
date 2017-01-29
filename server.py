@@ -179,13 +179,30 @@ def get_rsvps():
   q = RSVP.query().order(-RSVP.date)
   responses = q.fetch()
 
-  num_yes = len(RSVP.query().filter(RSVP.attending == True).fetch())
-  num_no = len(responses) - num_yes
+  num_yes = 0
+  num_no = 0
+  num_taking_shuttle = 0
+  for x in responses:
+    num_guests = len(x.guests)
+    if x.attending:
+      num_yes += num_guests
+    else:
+      num_no += num_guests
+    if x.taking_shuttle:
+      num_taking_shuttle = num_guests
+
+  total_guests = num_yes + num_no
+  percent_attending = round(num_yes * 1.0 / total_guests * 100)
 
   data = {
     'responses': responses,
+    'num_responses': len(responses),
+    'total_guests': total_guests,
     'num_yes': num_yes,
     'num_no': num_no,
+    'num_taking_shuttle': num_taking_shuttle,
+    'percent_attending': percent_attending,
+    'percent_not_attending': 100 - percent_attending,
   }
 
   return data
@@ -194,7 +211,7 @@ def get_rsvps():
 class RSVPAdmin(webapp2.RequestHandler):
 
   def get(self):
-   render(self.response, 'rsvp_list.html', get_rsvps())
+    render(self.response, 'rsvp_list.html', get_rsvps())
 
 
 class RSVPData(webapp2.RequestHandler):
@@ -248,13 +265,9 @@ class RSVPData(webapp2.RequestHandler):
 
   def __get_rsvps(self):
     rsvps = get_rsvps()
-
-    num_responses = len(rsvps['responses'])
-    percent_attending = (int(rsvps['num_yes']) / num_responses) * 100
-
     s = ("There are %s responses so far with %s yesses and %s noes. " +
-         "That's a %s%% acceptance rate.") % (num_responses, rsvps['num_yes'],
-                                              rsvps['num_no'], percent_attending)
+         "That's a %s%% acceptance rate.") % (rsvps['num_responses'], rsvps['num_yes'],
+                                              rsvps['num_no'],  rsvps['percent_attending'])
     return s
 
   def post(self):
@@ -266,7 +279,7 @@ class RSVPData(webapp2.RequestHandler):
     if action == 'get_days':
       s = self.__get_days_left()
     else:
-      s = self.__get_rsvps();
+      s = self.__get_rsvps()
 
     # JSON encode db results.
     #rsvps['responses'] = [response.to_dict() for response in rsvps['responses']]

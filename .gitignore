@@ -12,3 +12,4 @@ keyfile.txt
 *.pyc
 js/dist
 img/**/*.webp
+.vscode
