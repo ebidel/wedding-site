@@ -189,7 +189,7 @@ def get_rsvps():
     else:
       num_no += num_guests
     if x.taking_shuttle:
-      num_taking_shuttle = num_guests
+      num_taking_shuttle += num_guests
 
   total_guests = num_yes + num_no
   percent_attending = round(num_yes * 1.0 / total_guests * 100)
