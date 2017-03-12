@@ -19,5 +19,6 @@ Start up the App Engine dev server. Run `gulp` any time you make changes to JS c
 From https://github.com/AirConsole/letsencrypt:
 
 1. Go to [https://jackieeric.com/.well-known/acme-challenge/](https://jackieeric.com/.well-known/acme-challenge/) and login as an administrator
-2. Execute the displayed command in a shell that supports curl and openssl (Google Cloud Shell can be used)
+2. Temp change the endpoint in app.yaml to `secure: false`.
+3. Execute the displayed command in a shell that supports curl and openssl (Google Cloud Shell can be used)
 Upload the obtained certificates on [https://console.cloud.google.com/appengine/settings/certificates](https://console.cloud.google.com/appengine/settings/certificates)
