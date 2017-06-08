@@ -107,6 +107,7 @@ function initGallery() {
       case 'ArrowRight':
         flag = true;
         gallerySelectNext();
+        break;
       case 'Space':
         flag = true;
         gallerySelectNext(e.shiftKey);
