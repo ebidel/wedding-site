@@ -1,4 +1,4 @@
-Site: [https://jackieeric.com/](jackieeric.com)
+Site: [jackieeric.com](https://jackieeric.com)
 
 ### Development
 
