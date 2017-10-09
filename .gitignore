@@ -11,5 +11,7 @@ keyfile.txt
 .DS_Store
 *.pyc
 js/dist
+img/unused
 img/**/*.webp
+!img/icons
 .vscode
